@@ -1,0 +1,41 @@
+.portfolio__link {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 50px;
+    letter-spacing: -0.04em;
+    text-decoration: none;
+    padding: 20px 0 19px;
+    border-bottom: 2px #e8e8e8 solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000000;
+    transition: color 300ms ease;
+  }
+  
+  .portfolio__link:hover {
+    color: #465DFF
+  }
+  
+  .portfolio__link:first-of-type {
+    padding-top: 0;
+  }
+  
+  .portfolio__link:last-of-type {
+    border: none;
+    padding-bottom: 0;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .portfolio__link {
+      font-size: 28px;
+    }
+  }
+  
+  @media screen and (max-width: 700px) {
+    .portfolio__link {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+  

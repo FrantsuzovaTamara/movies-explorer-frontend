@@ -1,0 +1,9 @@
+.title_technologies {
+  margin-bottom: 90px;
+}
+
+@media screen and (max-width: 1000px) {
+  .title_technologies {
+    margin-bottom: 80px;
+  }
+}

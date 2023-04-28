@@ -1,0 +1,27 @@
+.header__account {
+  text-decoration: none;
+  padding: 0;
+  border: none;
+  background: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  color: #000000;
+  transition: color 100ms ease;
+}
+
+.header__account:hover {
+  color: #2be080;
+}
+
+@media screen and (max-width: 800px) {
+  .header__account {
+    display: none;
+  }
+}

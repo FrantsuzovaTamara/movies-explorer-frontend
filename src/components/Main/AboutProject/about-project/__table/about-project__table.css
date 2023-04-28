@@ -1,0 +1,22 @@
+.about-project__table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 70px 0 110px;
+}
+
+@media screen and (max-width: 1000px) {
+  .about-project__table {
+    gap: 30px;
+    padding: 70px 0 93px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about-project__table {
+    flex-direction: column;
+    gap: 56px;
+    padding: 0 0 60px;
+  }
+}

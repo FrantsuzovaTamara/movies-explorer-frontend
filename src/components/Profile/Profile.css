@@ -1,0 +1,9 @@
+@import url(./profile/profile.css);
+
+@import url(./profile/__greeting/profile__greeting.css);
+@import url(./profile/__info/profile__info.css);
+@import url(./profile/__item/profile__item.css);
+@import url(./profile/__item/_meaning/profile__item_meaning.css);
+@import url(./profile/__tools/profile__tools.css);
+@import url(./profile/__button/profile__button.css);
+@import url(./profile/__button/_exit/profile__button_exit.css);

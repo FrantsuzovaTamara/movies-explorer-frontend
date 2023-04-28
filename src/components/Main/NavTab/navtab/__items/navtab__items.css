@@ -1,0 +1,14 @@
+.navtab__items {
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    max-width: 276px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+    .navtab__items {
+        max-width: 214px;
+    }
+}

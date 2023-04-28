@@ -1,0 +1,17 @@
+.header__menu-items_opened {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  align-items: center;
+  position: absolute;
+  top: 159px;
+  right: calc((71.4286% - 200px) / 2);
+}
+
+@media screen and (max-width: 400px) {
+  .header__menu-items_opened {
+    top: 144px;
+    right: calc((100% - 200px) / 2);
+    gap: 15px;
+  }
+}

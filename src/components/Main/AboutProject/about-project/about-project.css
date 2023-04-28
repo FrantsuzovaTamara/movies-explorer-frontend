@@ -1,0 +1,19 @@
+.about-project {
+  min-height: 608px;
+  box-sizing: border-box;
+  padding: 110px 70px;
+}
+
+@media screen and (max-width: 1000px) {
+  .about-project {
+    padding: 90px 50px;
+    min-height: 585px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about-project {
+    padding: 70px 18px;
+    min-height: 641px;
+  }
+}

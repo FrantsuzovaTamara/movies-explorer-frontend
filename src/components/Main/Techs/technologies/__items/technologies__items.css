@@ -1,0 +1,23 @@
+.technologies__items {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    max-width: 690px;
+    width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .technologies__items {
+      max-width: 648px;
+    }
+  }
+  
+  @media screen and (max-width: 700px) {
+    .technologies__items {
+        flex-wrap: wrap;
+        gap: 10px;
+        max-width: 178px;
+    }
+  }

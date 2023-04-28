@@ -1,0 +1,13 @@
+.header__account_opened {
+  display: flex;
+  position: absolute;
+  bottom: 92px;
+  right: calc((71.4286% - 100px) / 2);
+}
+
+@media screen and (max-width: 400px) {
+  .header__account_opened {
+    bottom: 48px;
+    right: calc((100% - 100px) / 2);
+  }
+}

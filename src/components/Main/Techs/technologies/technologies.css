@@ -1,0 +1,21 @@
+.technologies {
+  background: #f5f5f5;
+  min-height: 625px;
+  box-sizing: border-box;
+  padding: 100px 70px;
+}
+
+@media screen and (max-width: 1000px) {
+  .technologies {
+    padding: 90px 50px;
+    min-height: 567px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .technologies {
+    padding: 70px 18px;
+    background: none;
+    min-height: 651px;
+  }
+}

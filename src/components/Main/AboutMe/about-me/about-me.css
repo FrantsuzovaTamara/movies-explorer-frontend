@@ -1,0 +1,19 @@
+.about-me {
+  min-height: 654px;
+  box-sizing: border-box;
+  padding: 110px 70px 100px;
+}
+
+@media screen and (max-width: 1000px) {
+  .about-me {
+    padding: 90px 50px;
+    min-height: 604px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about-me {
+    padding: 70px 14px;
+    min-height: 904px;
+  }
+}

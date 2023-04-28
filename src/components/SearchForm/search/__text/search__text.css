@@ -1,0 +1,25 @@
+.search__text {
+  width: 88.7%;
+  padding: 0;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  color: #000000;
+  border: none;
+}
+
+.search__text:focus {
+  border: none;
+  outline: none;
+}
+
+.search__text::placeholder {
+  color: #a0a0a0;
+}
+
+@media screen and (max-width: 700px) {
+  .search__text {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

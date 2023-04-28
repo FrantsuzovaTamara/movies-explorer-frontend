@@ -1,0 +1,11 @@
+.about-project__scales {
+  display: flex;
+  min-height: 67px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 700px) {
+  .about-project__scales {
+    min-height: 58px;
+  }
+}

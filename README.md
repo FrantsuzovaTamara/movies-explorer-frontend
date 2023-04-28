@@ -1,2 +1,1 @@
-# movies-explorer-frontend
-React app for movie explorer
+Ссылка на макет: https://disk.yandex.ru/d/BC5LL2lP7RgYYg

@@ -1,0 +1,19 @@
+.navigation__popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: right;
+  background: white;
+  width: 71.4286%;
+  height: 100%;
+  padding: 22.44px 22.44px 0 0;
+  transition: display 300ms ease;
+}
+
+@media screen and (max-width: 400px) {
+  .navigation__popup {
+    width: 100%;
+    padding: 13.44px 13.44px 0 0;
+  }
+}

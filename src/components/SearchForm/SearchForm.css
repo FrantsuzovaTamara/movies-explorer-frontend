@@ -1,0 +1,9 @@
+@import url(./search/search.css);
+
+@import url(./search/__find-film/search__find-film.css);
+@import url(./search/__text/search__text.css);
+@import url(./search/__button/search__button.css);
+@import url(./search/__short-films/search__shorts-films.css);
+@import url(./search/__label/search__label.css);
+@import url(./search/__radio/search__radio.css);
+@import url(./search/__item/search__item.css);

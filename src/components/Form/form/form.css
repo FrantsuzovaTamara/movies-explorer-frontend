@@ -1,0 +1,26 @@
+.form {
+  box-sizing: border-box;
+  min-height: 413px;
+  max-width: 396px;
+  width: 100%;
+  padding-bottom: 70px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+@media screen and (max-width: 1000px) {
+  .form {
+    padding-bottom: 232px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .form {
+    min-height: 497px;
+    max-width: 260px;
+    padding-bottom: 30px;
+  }
+}

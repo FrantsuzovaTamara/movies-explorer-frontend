@@ -1,0 +1,23 @@
+.technologies__item {
+  width: 90px;
+  height: 60px;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 300ms ease;
+}
+
+.technologies__item:hover {
+  background-color: #2BE080;
+}
+
+@media screen and (max-width: 1000px) {
+  .technologies__item {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

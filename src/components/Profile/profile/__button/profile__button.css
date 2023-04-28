@@ -1,0 +1,20 @@
+.profile__button {
+  display: block;
+  margin: 0 auto;
+  color: #000;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 16px;
+  transition: color 300ms ease;
+}
+
+@media screen and (max-width: 700px) {
+  .profile__button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+.profile__button:hover {
+  color: #2BE080;
+}

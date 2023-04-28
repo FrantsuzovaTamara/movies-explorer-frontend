@@ -1,0 +1,16 @@
+.search__find-film {
+  min-height: 48px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 13px;
+  border-bottom: 1px #e8e8e8 solid;
+}
+
+@media screen and (max-width: 700px) {
+  .search__find-film {
+    min-height: 44px;
+    padding-bottom: 9px;
+  }
+}

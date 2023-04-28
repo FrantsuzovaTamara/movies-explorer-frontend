@@ -1,0 +1,20 @@
+.promo__title {
+    margin: 0;
+    max-width: 730px;
+    min-height: 116px;
+    margin: 0 auto;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 58px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    padding: 0 10px 0;
+}
+
+@media screen and (max-width: 700px) {
+    .promo__title {
+        font-size: 31px;
+        line-height: 39px;
+    }
+}

@@ -1,0 +1,17 @@
+.search__button {
+  width: 58.65px;
+  height: 34px;
+  background: #ff6838;
+  border: none;
+  border-radius: 48px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  color: #ffffff;
+  transition: background-color 300ms ease;
+}
+
+.search__button:hover {
+  background-color: #2BE080;
+}
