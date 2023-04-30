@@ -1,6 +1,9 @@
 .search {
   padding: 70px 70px 47px;
   min-height: 237px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 

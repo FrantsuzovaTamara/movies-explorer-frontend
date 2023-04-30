@@ -10,6 +10,7 @@
   padding: 0;
   align-self: center;
   transition: background-color 300ms ease, color 300ms ease;
+  cursor: pointer;
 }
 
 .saved-movies__delete-button::before {

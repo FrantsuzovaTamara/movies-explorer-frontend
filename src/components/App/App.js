@@ -33,7 +33,7 @@ function App() {
           path="/movies"
           element={
             <>
-              <Header headerClass="header_auth">
+              <Header headerClass="_auth">
                 <UnauthorizedHeader auth={true} pointed="films" />
               </Header>
               <Movies />
@@ -45,7 +45,7 @@ function App() {
           path="/saved-movies"
           element={
             <>
-              <Header headerClass="header_auth">
+              <Header headerClass="_auth">
                 <UnauthorizedHeader auth={true} pointed="saved" />
               </Header>
               <SavedMovies />
@@ -57,7 +57,7 @@ function App() {
           path="/profile"
           element={
             <>
-              <Header headerClass="header_auth">
+              <Header headerClass="_auth">
                 <UnauthorizedHeader auth={true} />
               </Header>
               <Profile />
@@ -69,7 +69,7 @@ function App() {
           path="/signin"
           element={
             <>
-              <Header headerClass="header_form">
+              <Header headerClass="_form">
                 <FormHeader greeting="Рады видеть!" />
               </Header>
               <Login />
@@ -80,7 +80,7 @@ function App() {
           path="/signup"
           element={
             <>
-              <Header headerClass="header_form">
+              <Header headerClass="_form">
                 <FormHeader greeting="Добро пожаловать!" />
               </Header>
               <Register />

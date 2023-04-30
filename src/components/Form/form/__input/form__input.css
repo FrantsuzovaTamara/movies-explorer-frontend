@@ -5,13 +5,20 @@
   padding: 5px 0 10px;
   border: none;
   border-bottom: 1px #e8e8e8 solid;
-  transition: border-bottom 300ms ease, color 300ms ease;
+  transition: border-bottom 300ms ease, color 300ms ease, padding-left 300ms ease;
 }
 
 .form__input:focus {
-    outline: none;
+  outline: none;
+  padding-left: 10px;
+  background: linear-gradient(90deg, rgba(238,52,101,.2) 5%, rgba(255,255,255,1) 80%);
 }
 
 .form__input::placeholder {
   color: #a0a0a0;
+  transition: color 300ms ease;
+}
+
+.form__input:focus::placeholder {
+  color: white;
 }

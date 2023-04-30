@@ -12,5 +12,5 @@
 
 @import url(./unauth-header/__entrence/header__entrence.css);
 @import url(./unauth-header/__button/header__button.css);
-@import url(./unauth-header/__button/_enter/header__button_enter.css);
-@import url(./unauth-header/__button/_reg/header__button_reg.css);
+@import url(./unauth-header/__button/link/_login/header__button_link_login.css);
+@import url(./unauth-header/__button/link/_register/header__button_link_register.css);

@@ -1,7 +1,10 @@
 .saved-movies {
-  min-height: 619px;
+  min-height: 600px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
   box-sizing: border-box;
-  padding: 70px 70px 230px;
+  padding: 50px 70px 180px;
 }
 
 @media screen and (max-width: 1000px) {

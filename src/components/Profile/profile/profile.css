@@ -1,5 +1,4 @@
 .profile {
-  position: relative;
   min-height: 626px;
   max-width: 410px;
   width: 100%;
@@ -19,6 +18,6 @@
   .profile {
     max-width: 300px;
     min-height: 706px;
-    padding: 70px 0 40px;
+    padding: 70px 20px 40px;
   }
 }

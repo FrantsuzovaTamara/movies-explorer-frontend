@@ -1,9 +1,9 @@
-.header__button_reg {
+.header__button_link_register {
     background: none;
     color: #FFFFFF;
     transition: color 300ms ease;
 }
 
-.header__button_reg:hover {
+.header__button_link_register:hover {
     color: #2BE080;
 }

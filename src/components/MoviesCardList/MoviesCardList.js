@@ -2,7 +2,7 @@ import "./MoviesCardList.css";
 
 function MoviesCardList({children}) {
   return (
-    <ul class="movies__cards">
+    <ul className="movies__cards">
       {children}
     </ul>
   );

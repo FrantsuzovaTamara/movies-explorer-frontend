@@ -1,0 +1,13 @@
+.header__content_form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+@media screen and (max-width: 700px) {
+  .header__content_form {
+    align-items: center;
+    gap: 50px;
+  }
+}

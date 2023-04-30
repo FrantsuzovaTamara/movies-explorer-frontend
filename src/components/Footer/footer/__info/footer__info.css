@@ -1,4 +1,7 @@
 .footer__info {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
   font-size: 13px;
   line-height: 16px;
   text-align: center;

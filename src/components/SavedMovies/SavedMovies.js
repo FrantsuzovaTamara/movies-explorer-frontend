@@ -15,6 +15,9 @@ function SavedMovies() {
           <MoviesCard>
             <button className="saved-movies__delete-button"></button>
           </MoviesCard>
+          <MoviesCard>
+            <button className="saved-movies__delete-button"></button>
+          </MoviesCard>
         </MoviesCardList>
       </section>
     </main>

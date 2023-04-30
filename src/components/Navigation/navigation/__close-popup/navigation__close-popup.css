@@ -3,7 +3,8 @@
   background: none;
   padding: 0;
   background-image: url(../../../../images/header__close.svg);
-  background-size: 100%;
-  width: 22px;
-  height: 22px;
+  background-position: center;
+  width: 22.44px;
+  height: 22.44px;
+  cursor: pointer;
 }

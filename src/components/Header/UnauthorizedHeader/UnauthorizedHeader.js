@@ -5,18 +5,20 @@ import Navigation from "../../Navigation/Navigation";
 
 function UnauthorizedHeader({ auth, pointed }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  console.log(isMenuOpen);
 
   function openMenu() {
     setIsMenuOpen(!isMenuOpen);
-    console.log(isMenuOpen);
+  }
+
+  function closeMenu() {
+    setIsMenuOpen(false);
   }
 
   return (
     <>
       {auth ? (
         <>
-          {isMenuOpen && <Navigation closeMenu={openMenu} />}
+          {isMenuOpen && <Navigation closeMenu={closeMenu} />}
           <ul
             className={`header__menu-items ${
               isMenuOpen ? "header__menu-items_opened" : ""
@@ -30,7 +32,7 @@ function UnauthorizedHeader({ auth, pointed }) {
               >
                 <NavLink
                   to="/"
-                  onClick={openMenu}
+                  onClick={closeMenu}
                   className={
                     pointed === "films"
                       ? "header__menu-link header__menu-link_pointed"
@@ -48,7 +50,7 @@ function UnauthorizedHeader({ auth, pointed }) {
             >
               <NavLink
                 to="/movies"
-                onClick={openMenu}
+                onClick={closeMenu}
                 className={
                   pointed === "films"
                     ? "header__menu-link header__menu-link_pointed"
@@ -65,7 +67,7 @@ function UnauthorizedHeader({ auth, pointed }) {
             >
               <NavLink
                 to="/saved-movies"
-                onClick={openMenu}
+                onClick={closeMenu}
                 className={
                   pointed === "saved"
                     ? "header__menu-link header__menu-link_pointed"
@@ -78,6 +80,7 @@ function UnauthorizedHeader({ auth, pointed }) {
           </ul>
           <NavLink
             to="/profile"
+            onClick={closeMenu}
             className={`header__account ${
               isMenuOpen ? "header__account_opened" : ""
             }`}
@@ -96,10 +99,10 @@ function UnauthorizedHeader({ auth, pointed }) {
         </>
       ) : (
         <nav className="header__entrence">
-          <NavLink to="/signup" className="header__button header__button_reg">
+          <NavLink to="/signup" className="header__button header__button_link_register">
             Регистрация
           </NavLink>
-          <NavLink to="/signin" className="header__button header__button_enter">
+          <NavLink to="/signin" className="header__button header__button_link_login">
             Войти
           </NavLink>
         </nav>

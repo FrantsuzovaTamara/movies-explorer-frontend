@@ -1,7 +1,10 @@
 .movies {
   min-height: 435px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
   box-sizing: border-box;
-  padding: 70px 70px 80px;
+  padding: 50px 70px 80px;
 }
 
 @media screen and (max-width: 1000px) {

@@ -1,5 +1,6 @@
 @import url(./technologies/technologies.css);
 
+@import url(./technologies/__content/technologies__content.css);
 @import url(./technologies/__title/technologies__title.css);
 @import url(./technologies/__text/technologies__text.css);
 @import url(./technologies/__items/technologies__items.css);

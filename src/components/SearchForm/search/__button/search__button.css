@@ -10,6 +10,7 @@
   text-align: center;
   color: #ffffff;
   transition: background-color 300ms ease;
+  cursor: pointer;
 }
 
 .search__button:hover {

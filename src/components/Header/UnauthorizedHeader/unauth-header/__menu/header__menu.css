@@ -1,8 +1,14 @@
 .header__menu {
     display: none;
+    opacity: 1;
+    transition: opacity 300ms ease;
 }
 
-@media screen and (max-width: 800px) {
+.header__menu:hover {
+  opacity: .3;
+}
+
+@media screen and (max-width: 768px) {
     .header__menu {
         display: block;
         border: none;
@@ -13,12 +19,14 @@
         background-position: center;
         width: 44px;
         height: 44px;
+        cursor: pointer;
     }
 }
 
 @media screen and (max-width: 400px) {
     .header__menu {
-        width: 40px;
-        height: 43px;
+        width: 20px;
+        height: 34px;
+        margin-right: 10px;
     }
 }

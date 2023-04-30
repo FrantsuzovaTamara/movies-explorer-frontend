@@ -2,10 +2,11 @@
 
 @import url(./form/__title/form__title.css);
 @import url(./form/__input/form__input.css);
-@import url(./form/__input/_error/form__input_error.css);
+@import url(./form/__input/type/_error/form__input_type_error.css);
 @import url(./form/__input-error/form__input-error.css);
-@import url(./form/__input-error/_active/form__input-error_active.css);
 @import url(./form/__buttons/form__buttons.css);
+@import url(./form/__buttons/link/_login/form__buttons_link_login.css);
+@import url(./form/__buttons/link/_register/form__buttons_link_register.css);
 @import url(./form/__button/form__button.css);
 @import url(./form/__button/_active/form__button_active.css);
 @import url(./form/__text/form__text.css);

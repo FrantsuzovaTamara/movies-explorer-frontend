@@ -1,4 +1,7 @@
 .header__menu-item {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
   height: 18px;
   list-style: none;
   border-bottom: none;

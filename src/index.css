@@ -5,7 +5,7 @@
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   color: #000000;
-  max-width: 1600px;
+  width: 100%;
   min-width: 320px;
   margin: 0 auto;
 }
