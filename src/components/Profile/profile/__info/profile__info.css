@@ -1,0 +1,13 @@
+.profile__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.profile__info:first-of-type {
+    padding-bottom: 16px;
+    border-bottom: 1px #E8E8E8 solid;
+    margin-bottom: 17px;
+}
+

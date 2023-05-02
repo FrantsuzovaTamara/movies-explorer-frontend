@@ -1,0 +1,14 @@
+.header__account-icon {
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  background-image: url(../../../../../images/header__account.svg);
+  background-color: #f9f9f9;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-color 300ms ease;
+}
+
+.header__account:hover > .header__account-icon {
+  background-color: #2BE080;
+}

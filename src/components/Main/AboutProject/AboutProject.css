@@ -1,0 +1,18 @@
+@import url(./about-project/about-project.css);
+
+@import url(./about-project/__table/about-project__table.css);
+@import url(./about-project/__text/about-project__text.css);
+@import url(./about-project/__text-title/about-project__text-title.css);
+@import url(./about-project/__main-text/about-project__main-text.css);
+
+@import url(./about-project/__scales/about-project__scales.css);
+@import url(./about-project/__scale/about-project__scale.css);
+@import url(./about-project/__scale/_green/about-project__scale_green.css);
+@import url(./about-project/__scale//_grey/about-project__scale_grey.css);
+@import url(./about-project/__week/about-project__week.css);
+@import url(./about-project/__week/_green/about-project__week_green.css);
+@import url(./about-project/__week/_grey/about-project__week_grey.css);
+@import url(./about-project/__subscription/about-project__subscription.css);
+
+@import url(../main/title/title.css);
+@import url(../main/title/_about-project/title_about-project.css);

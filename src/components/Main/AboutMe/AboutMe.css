@@ -1,0 +1,12 @@
+@import url(./about-me/about-me.css);
+
+@import url(./about-me/__about/about-me__about.css);
+@import url(./about-me/__info/about-me__info.css);
+@import url(./about-me/__name/about-me__name.css);
+@import url(./about-me/__short-info/about-me__short-info.css);
+@import url(./about-me/__description/about-me__description.css);
+@import url(./about-me/__github-link/about-me__github-link.css);
+@import url(./about-me/__avatar/about-me__avatar.css);
+
+@import url(../main/title/title.css);
+@import url(../main/title/_about-me/title_about-me.css);

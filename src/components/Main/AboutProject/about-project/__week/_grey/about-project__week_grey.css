@@ -1,0 +1,9 @@
+.about-project__week_grey {
+    background: #F2F2F2;
+    color: #000000;
+    transition: color 300ms ease;
+}
+
+.about-project__week_grey:hover {
+    color: #465DFF;
+}

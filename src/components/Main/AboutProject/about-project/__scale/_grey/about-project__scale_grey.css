@@ -1,0 +1,15 @@
+.about-project__scale_grey {
+  width: 80%;
+}
+
+@media screen and (max-width: 1000px) {
+  .about-project__scale_grey {
+    width: 79%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about-project__scale_grey {
+    width: 64.7887%;
+  }
+}

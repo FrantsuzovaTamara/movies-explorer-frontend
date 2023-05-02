@@ -1,0 +1,32 @@
+.header__menu {
+    display: none;
+    opacity: 1;
+    transition: opacity 300ms ease;
+}
+
+.header__menu:hover {
+  opacity: .3;
+}
+
+@media screen and (max-width: 768px) {
+    .header__menu {
+        display: block;
+        border: none;
+        background: none;
+        padding: 0;
+        background-image: url(../../../../../images/header__menu.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .header__menu {
+        width: 20px;
+        height: 34px;
+        margin-right: 10px;
+    }
+}

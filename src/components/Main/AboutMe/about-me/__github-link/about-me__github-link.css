@@ -1,0 +1,12 @@
+.about-me__github-link {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  color: #000000;
+  transition: color 300ms ease;
+}
+
+.about-me__github-link:hover {
+  color: #465DFF;
+}

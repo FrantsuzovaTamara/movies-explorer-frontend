@@ -1,0 +1,23 @@
+.technologies__title {
+  margin: 0;
+  padding-bottom: 26px;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 1000px) {
+  .technologies__title {
+    padding-bottom: 22px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .technologies__title {
+    font-size: 30px;
+    line-height: 36px;
+    padding-bottom: 24px;
+  }
+}

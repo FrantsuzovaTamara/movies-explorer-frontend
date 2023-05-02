@@ -1,0 +1,15 @@
+.movies__add-more-movies-button {
+  width: 100%;
+  height: 36px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  transition: background-color 300ms ease;
+}
+
+.movies__add-more-movies-button:hover {
+  background: #2BE080;
+}

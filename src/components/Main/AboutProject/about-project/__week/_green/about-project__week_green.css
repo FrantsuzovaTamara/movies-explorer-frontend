@@ -1,0 +1,10 @@
+.about-project__week_green {
+    background: #2BE080;
+    transition: background-color 300ms ease, color 300ms ease;
+    color: #000000;
+}
+
+.about-project__week_green:hover {
+    background: #465DFF;
+    color: white;
+}

@@ -1,0 +1,24 @@
+.header__button_link_login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    width: 76px;
+    height: 32px;
+    box-sizing: border-box;
+    background-color: #2BE080;
+    border-radius: 3px;
+    transition: background-color 300ms ease;
+}
+
+.header__button_link_login:hover {
+    background-color: #f8f8f8;
+}
+
+@media screen and (max-width: 700px) {
+    .header__button_link_login {
+        width: 54px;
+        height: 26px;  
+        margin-left: 14px;
+    }
+}

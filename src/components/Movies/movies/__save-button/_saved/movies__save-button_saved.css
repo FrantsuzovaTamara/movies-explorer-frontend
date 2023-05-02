@@ -1,0 +1,7 @@
+.movies__save-button_saved {
+  background-color: #ee3465;
+}
+
+.movies__save-button_saved::before {
+  content: url(../../../../../images/films__icon.svg);
+}

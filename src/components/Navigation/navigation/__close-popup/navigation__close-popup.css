@@ -1,0 +1,10 @@
+.navigation__close-popup {
+  border: none;
+  background: none;
+  padding: 0;
+  background-image: url(../../../../images/header__close.svg);
+  background-position: center;
+  width: 22.44px;
+  height: 22.44px;
+  cursor: pointer;
+}

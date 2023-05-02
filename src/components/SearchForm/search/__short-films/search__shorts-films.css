@@ -1,0 +1,25 @@
+.search__short-films {
+  padding-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  gap: 14px;
+}
+
+@media screen and (max-width: 1000px) {
+  .search__short-films {
+    padding-top: 32px;
+    flex-direction: row;
+    justify-content: end;
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .search__short-films {
+    padding-top: 40px;
+    justify-content: center;
+    gap: 13px;
+  }
+}

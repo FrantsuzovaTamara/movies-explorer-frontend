@@ -1,0 +1,22 @@
+.movies {
+  min-height: 435px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 50px 70px 80px;
+}
+
+@media screen and (max-width: 1000px) {
+  .movies {
+    min-height: 505px;
+    padding: 70px 30px 80px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .movies {
+    min-height: 477px;
+    padding: 40px 10px 80px;
+  }
+}

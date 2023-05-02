@@ -1,0 +1,9 @@
+.search__radio {
+  width: 36px;
+  height: 20px;
+  background: #ebebeb;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,22 @@
+.about-project__text-title {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  margin: 0;
+  padding-bottom: 26px;
+}
+
+@media screen and (max-width: 1000px) {
+  .about-project__text-title {
+    padding-bottom: 22px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about-project__text-title {
+    padding-bottom: 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

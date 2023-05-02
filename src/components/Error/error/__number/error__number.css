@@ -1,0 +1,15 @@
+.error__number {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+  text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+  .error__number {
+    font-size: 80px;
+    line-height: 97px;
+  }
+}

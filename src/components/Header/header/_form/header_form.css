@@ -1,0 +1,23 @@
+.header_form {
+  background-color: white;
+  min-height: 217px;
+  max-width: 396px;
+  width: 100%;
+  padding: 70px 0 40px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1000px) {
+  .header_form {
+    min-height: 379px;
+    padding-top: 232px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .header_form {
+    min-height: 253px;
+    padding: 56px 0 80px;
+  }
+}

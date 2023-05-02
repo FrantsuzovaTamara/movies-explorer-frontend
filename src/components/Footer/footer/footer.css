@@ -1,0 +1,21 @@
+.footer {
+  background: #fafafa;
+  min-height: 172px;
+  box-sizing: border-box;
+  padding: 79px 70px 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .footer {
+    background: white;
+    padding: 79px 30px 20px;
+    min-height: 172px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .footer {
+    padding: 79px 10px 20px;
+    min-height: 253px;
+  }
+}

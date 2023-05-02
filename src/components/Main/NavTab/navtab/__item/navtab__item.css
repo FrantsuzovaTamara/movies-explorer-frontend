@@ -1,0 +1,19 @@
+.navtab__item {
+    list-style: none;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    border-bottom: 1px #000 solid;
+    transition: border-bottom 300ms ease;
+}
+
+.navtab__item:hover {
+    border-bottom: 1px #465DFF solid;
+}
+
+@media screen and (max-width: 700px) {
+    .navtab__item {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

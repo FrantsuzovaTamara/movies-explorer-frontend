@@ -1,0 +1,18 @@
+.header__menu-item_opened {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.header__menu-item_opened:first-of-type {
+  padding-bottom: 7px;
+}
+
+.header__menu-item_opened:first-of-type:hover {
+  padding-bottom: 6px;
+}
+
+@media screen and (max-width: 400px) {
+  .header__menu-item_opened:first-of-type {
+    padding-bottom: 6px;
+  }
+}

@@ -1,0 +1,31 @@
+.header__menu-item {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  height: 18px;
+  list-style: none;
+  border-bottom: none;
+  padding-bottom: 4px;
+  transition: border-bottom 300ms ease;
+}
+
+.header__menu-item:hover {
+  padding-bottom: 3px;
+  border-bottom: 1px #465dff solid;
+}
+
+@media screen and (max-width: 700px) {
+  .header__menu-item {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header__menu-item {
+    padding-bottom: 7px;
+  }
+  .header__menu-item:hover {
+    padding-bottom: 6px;
+  }
+}

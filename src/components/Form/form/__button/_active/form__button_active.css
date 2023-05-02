@@ -1,0 +1,9 @@
+.form__button_active {
+  cursor: pointer;
+  background: #ff6838;
+  color: white;
+}
+
+.form__button_active:hover {
+  background-color: #2be080;
+}

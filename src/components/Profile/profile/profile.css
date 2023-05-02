@@ -1,0 +1,23 @@
+.profile {
+  min-height: 626px;
+  max-width: 410px;
+  width: 100%;
+  padding: 74px 0 70px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1000px) {
+  .profile {
+    min-height: 950px;
+    padding: 236px 0 269px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .profile {
+    max-width: 300px;
+    min-height: 706px;
+    padding: 70px 20px 40px;
+  }
+}

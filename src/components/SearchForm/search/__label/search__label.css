@@ -1,0 +1,11 @@
+.search__label {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+@media screen and (max-width: 700px) {
+  .search__label {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}

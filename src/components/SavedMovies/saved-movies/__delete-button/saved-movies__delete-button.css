@@ -1,0 +1,23 @@
+.saved-movies__delete-button {
+  width: 100px;
+  height: 29px;
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 11px;
+  color: #000000;
+  border: none;
+  background-color: #f9f9f9;
+  padding: 0;
+  align-self: center;
+  transition: background-color 300ms ease, color 300ms ease;
+  cursor: pointer;
+}
+
+.saved-movies__delete-button::before {
+  content: url(../../../../images/films__delete-icon.svg);
+}
+
+.saved-movies__delete-button:hover {
+  background-color: #ee3465;
+  color: white;
+}
