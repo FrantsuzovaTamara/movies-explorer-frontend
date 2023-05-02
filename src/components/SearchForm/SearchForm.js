@@ -2,7 +2,7 @@ import "./SearchForm.css";
 
 function SearchForm() {
   return (
-    <section className="search">
+    <form className="search">
       <div className="search__find-film">
         <input
           className="search__text"
@@ -10,7 +10,7 @@ function SearchForm() {
           id="find-film"
           placeholder="Фильм"
         />
-        <button className="search__button">Найти</button>
+        <button type="submit" className="search__button">Найти</button>
       </div>
       <div className="search__short-films">
         <label className="search__label">Короткометражки</label>
@@ -30,7 +30,7 @@ function SearchForm() {
           />
         </div>
       </div>
-    </section>
+    </form>
   );
 }
 

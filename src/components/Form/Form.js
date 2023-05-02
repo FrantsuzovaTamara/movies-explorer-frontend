@@ -3,7 +3,7 @@ import { useState } from "react";
 import FormValidator from "../../utils/FormValidators";
 import { NavLink } from "react-router-dom";
 
-function Form({ buttonText, textUnderButton, linkText, link }) {
+function Form({ buttonText, textUnderButton, linkText, link, onSubmit }) {
   const [formValues, setFormValues] = useState([]);
 
   const { errors, isValid, handleChange } = FormValidator({});
@@ -18,8 +18,13 @@ function Form({ buttonText, textUnderButton, linkText, link }) {
     });
   };
 
+  function submitForm(e) {
+    e.preventDefault();
+    onSubmit(formValues);
+  }
+
   return (
-    <form className="form" noValidate>
+    <form className="form" onSubmit={submitForm} noValidate>
       {buttonText === "Зарегистрироваться" && (
         <label className="form__title">
           Имя

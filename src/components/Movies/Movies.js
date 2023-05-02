@@ -9,42 +9,11 @@ function Movies() {
       <SearchForm />
       <section className="movies">
         <MoviesCardList>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="movies__save-button"></button>
-          </MoviesCard>
+          {
+            <MoviesCard>
+              <button className="movies__save-button"></button>
+            </MoviesCard>
+          }
         </MoviesCardList>
         <div className="movies__more">
           <button className="movies__add-more-movies-button">Ещё</button>
