@@ -6,11 +6,10 @@ const checkResponse = (res) => {
   } else {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
-}
+};
 
 export const getMovies = () => {
   return fetch(MOVIE_URL, {
-    method: 'GET',
-  })
-  .then(checkResponse);
-}
+    method: "GET",
+  }).then(checkResponse);
+};

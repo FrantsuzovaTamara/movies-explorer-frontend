@@ -1,4 +1,4 @@
-const STATUS = "production";
+const STATUS = "development";
 export const MOVIE_URL = "https://api.nomoreparties.co/beatfilm-movies";
 let BASE_URL;
 

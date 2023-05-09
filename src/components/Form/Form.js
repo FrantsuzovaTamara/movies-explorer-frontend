@@ -1,9 +1,20 @@
-import "./Form.css";
 import { useState } from "react";
-import FormValidator from "../../utils/FormValidators";
 import { NavLink } from "react-router-dom";
+import "./Form.css";
+import FormValidator from "../../utils/FormValidators";
 
-function Form({ buttonText, textUnderButton, linkText, link, onSubmit }) {
+function Form({
+  buttonText,
+  textUnderButton,
+  linkText,
+  link,
+  onSubmit,
+  form,
+  userName,
+  userEmail,
+  handleChangeName,
+  handleChangeEmail,
+}) {
   const [formValues, setFormValues] = useState([]);
 
   const { errors, isValid, handleChange } = FormValidator({});
@@ -25,7 +36,7 @@ function Form({ buttonText, textUnderButton, linkText, link, onSubmit }) {
 
   return (
     <form className="form" onSubmit={submitForm} noValidate>
-      {buttonText === "Зарегистрироваться" && (
+      {(form === "register" || form === "edit") && (
         <label className="form__title">
           Имя
           <input
@@ -38,8 +49,8 @@ function Form({ buttonText, textUnderButton, linkText, link, onSubmit }) {
               errors.name ? " form__input_type_error" : ""
             }`}
             placeholder="Имя"
-            value={formValues.name || ""}
-            onChange={handleChangeValue}
+            value={form === "edit" ? userName || "" : formValues.name || ""}
+            onChange={form === "edit" ? handleChangeName : handleChangeValue}
             required
           />
           <span
@@ -59,8 +70,8 @@ function Form({ buttonText, textUnderButton, linkText, link, onSubmit }) {
             errors.email ? " form__input_type_error" : ""
           }`}
           placeholder="E-mail"
-          value={formValues.email || ""}
-          onChange={handleChangeValue}
+          value={form === "edit" ? userEmail || "" : formValues.email || ""}
+          onChange={form === "edit" ? handleChangeEmail : handleChangeValue}
           required
         />
         <span
@@ -71,33 +82,35 @@ function Form({ buttonText, textUnderButton, linkText, link, onSubmit }) {
           {errors.email}
         </span>
       </label>
-      <label className="form__title">
-        Пароль
-        <input
-          id="password"
-          type="password"
-          name="password"
-          minLength="6"
-          maxLength="30"
-          className={`form__input${
-            errors.password ? " form__input_type_error" : ""
-          }`}
-          placeholder="Пароль"
-          value={formValues.password || ""}
-          onChange={handleChangeValue}
-          required
-        />
-        <span
-          className={`form__input-error${
-            errors.password ? " form__input-error_active" : ""
-          }`}
-        >
-          {errors.password}
-        </span>
-      </label>
+      {(form === "register" || form === "login") && (
+        <label className="form__title">
+          Пароль
+          <input
+            id="password"
+            type="password"
+            name="password"
+            minLength="6"
+            maxLength="30"
+            className={`form__input${
+              errors.password ? " form__input_type_error" : ""
+            }`}
+            placeholder="Пароль"
+            value={formValues.password || ""}
+            onChange={handleChangeValue}
+            required
+          />
+          <span
+            className={`form__input-error${
+              errors.password ? " form__input-error_active" : ""
+            }`}
+          >
+            {errors.password}
+          </span>
+        </label>
+      )}
       <div
         className={
-          buttonText === "Зарегистрироваться"
+          form === "register"
             ? "form__buttons form__buttons_link_register"
             : "form__buttons form__buttons_link_login"
         }

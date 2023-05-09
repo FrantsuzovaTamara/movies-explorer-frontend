@@ -57,11 +57,22 @@ export const addMovieInApi = ({
   nameRU,
   nameEN,
 }) => {
-  return fetch(`${this._baseUrl}/cards`, {
+  console.log({country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN});
+  return fetch(`${BASE_URL}/cards`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
-      "Content-Type": this._contentType,
+      "Content-Type": contentType,
       "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
@@ -81,11 +92,11 @@ export const addMovieInApi = ({
 };
 
 export const deleteMovieInApi = (cardId) => {
-  return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  return fetch(`${BASE_URL}/cards/${cardId}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
-      "Content-Type": this._contentType,
+      "Content-Type": contentType,
       "Access-Control-Allow-Origin": "*",
     },
   }).then(checkResponse);

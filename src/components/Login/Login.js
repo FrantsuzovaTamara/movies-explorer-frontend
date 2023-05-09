@@ -12,6 +12,7 @@ function Login({ handleLogin }) {
       link="/signup"
       linkText="Регистрация"
       onSubmit={handleSubmit}
+      form="login"
     />
   );
 }

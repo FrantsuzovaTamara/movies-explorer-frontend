@@ -13,6 +13,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import EditProfile from "../EditProfile/EditProfile";
 import Footer from "../Footer/Footer";
 import Error from "../Error/Error";
 
@@ -22,16 +23,12 @@ import * as Auth from "../../utils/Auth";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState({});
-  const [deletedMovie, setDeletedMovie] = useState({});
-
-  const [userData, setUserData] = useState({});
-
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [moviesFromApi, setMoviesFromApi] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -41,10 +38,15 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      Promise.all([MainApi.getUserInfo(), MainApi.getSavedMovies()])
-        .then(([userData, movies]) => {
+      Promise.all([
+        MainApi.getUserInfo(),
+        MainApi.getSavedMovies(),
+        MoviesApi.getMovies(),
+      ])
+        .then(([userData, savedMovies, moviesFromApi]) => {
           setCurrentUser(userData);
-          setMovies(movies.movies.reverse());
+          setSavedMovies(savedMovies);
+          setMoviesFromApi(moviesFromApi);
         })
         .catch((err) => {
           console.log(err);
@@ -57,7 +59,7 @@ function App() {
       .then((data) => {
         localStorage.setItem("jwt", JSON.stringify(data.token));
         setLoggedIn(true);
-        setUserData({
+        setCurrentUser({
           email: email,
           password: password,
         });
@@ -84,11 +86,10 @@ function App() {
       Auth.checkToken(jwt)
         .then((res) => {
           if (res) {
-            setUserData({
+            setCurrentUser({
               email: res.email,
             });
             setLoggedIn(true);
-            navigate("/movies", { replace: true });
           }
         })
         .catch((err) => {
@@ -97,14 +98,95 @@ function App() {
     }
   }
 
+  function handleUpdateUser(userData) {
+    setIsLoading(true);
+    MainApi.editProfileInfo(userData)
+      .then((data) => {
+        setCurrentUser(data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   function signOut() {
     localStorage.removeItem("jwt");
-    setUserData({
+    setCurrentUser({
       email: "",
       password: "",
     });
     setLoggedIn(false);
     navigate("/", { replace: true });
+  }
+
+  function searchMovies(movies, name, shortFilms) {
+    setIsLoading(true);
+    setMovies([]);
+    const searchedMovies = movies.filter((movie) => {
+      const rusName = movie.nameRU.toLowerCase();
+      const engName = movie.nameRU.toLowerCase();
+      if (!shortFilms) {
+        if (
+          (rusName.includes(name) || engName.includes(name)) &&
+          movie.duration > 40
+        ) {
+          return movie;
+        }
+      } else {
+        if (
+          (rusName.includes(name) || engName.includes(name)) &&
+          movie.duration <= 40
+        ) {
+          return movie;
+        }
+      }
+    });
+    setMovies(searchedMovies);
+    setIsLoading(false);
+  }
+
+  function searchNewMovies(name, shortFilms) {
+    searchMovies(moviesFromApi, name, shortFilms);
+  }
+
+  function searchSavedMovies(name, shortFilms) {
+    searchMovies(savedMovies, name, shortFilms);
+  }
+
+  function handleSaveMovie(movie) {
+    console.log(movie);
+    MainApi.addMovieInApi({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: `https://api.nomoreparties.co/${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    })
+      .then((newMovie) => {
+        setMovies([newMovie.user, ...savedMovies]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function deleteMovie(movie) {
+    MainApi.deleteMovieInApi(movie.id)
+      .then((res) => {
+        setSavedMovies(savedMovies.filter((m) => m.id !== movie.id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -126,11 +208,19 @@ function App() {
           path="/movies"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <Header headerClass="_auth">
-                <UnauthorizedHeader auth={true} pointed="films" />
-              </Header>
-              <Movies />
-              <Footer />
+              <>
+                <Header headerClass="_auth">
+                  <UnauthorizedHeader auth={true} pointed="films" />
+                </Header>
+                <Movies
+                  searchMovies={searchNewMovies}
+                  saveMovie={handleSaveMovie}
+                  movies={movies}
+                  savedMovies={savedMovies}
+                  isLoading={isLoading}
+                />
+                <Footer />
+              </>
             </ProtectedRoute>
           }
         />
@@ -138,11 +228,18 @@ function App() {
           path="/saved-movies"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <Header headerClass="_auth">
-                <UnauthorizedHeader auth={true} pointed="saved" />
-              </Header>
-              <SavedMovies />
-              <Footer />
+              <>
+                <Header headerClass="_auth">
+                  <UnauthorizedHeader auth={true} pointed="saved" />
+                </Header>
+                <SavedMovies
+                  searchMovies={searchSavedMovies}
+                  deleteMovie={deleteMovie}
+                  savedMovies={savedMovies}
+                  isLoading={isLoading}
+                />
+                <Footer />
+              </>
             </ProtectedRoute>
           }
         />
@@ -150,14 +247,28 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <Header headerClass="_auth">
-                <UnauthorizedHeader auth={true} />
-              </Header>
-              <Profile />
-              <Footer />
+              <>
+                <Header headerClass="_auth">
+                  <UnauthorizedHeader auth={true} />
+                </Header>
+                <Profile signOut={signOut} />
+                <Footer />
+              </>
             </ProtectedRoute>
           }
-          signOut={signOut}
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <ProtectedRoute loggedIn={loggedIn}>
+              <>
+                <Header headerClass="_form">
+                  <FormHeader greeting="Внесите изменения:" />
+                </Header>
+                <EditProfile handleUpdateUser={handleUpdateUser} />
+              </>
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/signin"
@@ -169,11 +280,10 @@ function App() {
                 <Header headerClass="_form">
                   <FormHeader greeting="Рады видеть!" />
                 </Header>
-                <Login />
+                <Login handleLogin={handleLogin} />
               </>
             )
           }
-          handleLogin={handleLogin}
         />
         <Route
           path="/signup"
@@ -185,11 +295,10 @@ function App() {
                 <Header headerClass="_form">
                   <FormHeader greeting="Добро пожаловать!" />
                 </Header>
-                <Register />
+                <Register handleRegister={handleRegister} />
               </>
             )
           }
-          handleRegister={handleRegister}
         />
         <Route
           path="/404"

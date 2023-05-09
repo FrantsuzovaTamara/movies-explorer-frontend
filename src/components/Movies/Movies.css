@@ -1,4 +1,5 @@
 @import url(./movies/movies.css);
+@import url(./movies/__text/movies__text.css);
 @import url(./movies/__more/movies__more.css);
 @import url(./movies/__add-more-movies-button/movies__add-more-movies-button.css);
 @import url(./movies/__save-button/movies__save-button.css);

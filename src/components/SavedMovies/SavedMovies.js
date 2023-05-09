@@ -2,26 +2,36 @@ import "./SavedMovies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
-function SavedMovies() {
+function SavedMovies({ isLoading, savedMovies, deleteMovie, searchMovies }) {
   return (
     <main>
-      <SearchForm />
+      <SearchForm searchMovies={searchMovies} />
       <section className="saved-movies">
-        <MoviesCardList>
-          <MoviesCard>
-            <button className="saved-movies__delete-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="saved-movies__delete-button"></button>
-          </MoviesCard>
-          <MoviesCard>
-            <button className="saved-movies__delete-button"></button>
-          </MoviesCard>
-        </MoviesCardList>
+        {isLoading ? (
+          <Preloader />
+        ) : savedMovies ? (
+          <p className="saved-movies__text">Сохранённых фильмов пока нет</p>
+        ) : (
+          <>
+            <MoviesCardList>
+              {savedMovies.map((savedMovie) => (
+                <MoviesCard
+                  name={savedMovie.nameRU}
+                  duration={savedMovie.duration}
+                  poster={savedMovie.image.url}
+                  key={savedMovie.id}
+                >
+                  <button className="saved-movies__delete-button" onClick={deleteMovie}></button>
+                </MoviesCard>
+              ))}
+            </MoviesCardList>
+          </>
+        )}
       </section>
     </main>
-  )
+  );
 }
 
 export default SavedMovies;
