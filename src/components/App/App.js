@@ -45,7 +45,7 @@ function App() {
       ])
         .then(([userData, savedMovies, moviesFromApi]) => {
           setCurrentUser(userData);
-          setSavedMovies(savedMovies);
+          setSavedMovies(savedMovies.userMovies);
           setMoviesFromApi(moviesFromApi);
         })
         .catch((err) => {
@@ -157,7 +157,6 @@ function App() {
   }
 
   function handleSaveMovie(movie) {
-    console.log(movie);
     MainApi.addMovieInApi({
       country: movie.country,
       director: movie.director,
@@ -172,7 +171,7 @@ function App() {
       nameEN: movie.nameEN,
     })
       .then((newMovie) => {
-        setMovies([newMovie.user, ...savedMovies]);
+        setSavedMovies([newMovie.movie, ...savedMovies]);
       })
       .catch((err) => {
         console.log(err);
@@ -180,9 +179,9 @@ function App() {
   }
 
   function deleteMovie(movie) {
-    MainApi.deleteMovieInApi(movie.id)
+    MainApi.deleteMovieInApi(movie._id)
       .then((res) => {
-        setSavedMovies(savedMovies.filter((m) => m.id !== movie.id));
+        setSavedMovies(savedMovies.filter((m) => m._id !== movie._id));
       })
       .catch((err) => {
         console.log(err);
@@ -215,6 +214,7 @@ function App() {
                 <Movies
                   searchMovies={searchNewMovies}
                   saveMovie={handleSaveMovie}
+                  deleteMovie={deleteMovie}
                   movies={movies}
                   savedMovies={savedMovies}
                   isLoading={isLoading}

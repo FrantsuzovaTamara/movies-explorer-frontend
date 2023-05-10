@@ -68,7 +68,7 @@ export const addMovieInApi = ({
     movieId,
     nameRU,
     nameEN});
-  return fetch(`${BASE_URL}/cards`, {
+  return fetch(`${BASE_URL}/movies`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
@@ -91,8 +91,8 @@ export const addMovieInApi = ({
   }).then(checkResponse);
 };
 
-export const deleteMovieInApi = (cardId) => {
-  return fetch(`${BASE_URL}/cards/${cardId}`, {
+export const deleteMovieInApi = (movieId) => {
+  return fetch(`${BASE_URL}/movies/${movieId}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
