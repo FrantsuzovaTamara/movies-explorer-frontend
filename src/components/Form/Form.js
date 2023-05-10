@@ -1,28 +1,32 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Form.css";
 import FormValidator from "../../utils/FormValidators";
+import { useContext, useEffect, useState } from "react";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 
-function Form({
-  buttonText,
-  textUnderButton,
-  linkText,
-  link,
-  onSubmit,
-  form,
-  userName,
-  userEmail,
-  handleChangeName,
-  handleChangeEmail,
-}) {
+function Form({ buttonText, textUnderButton, linkText, link, onSubmit, form }) {
   const [formValues, setFormValues] = useState([]);
 
-  const { errors, isValid, handleChange } = FormValidator({});
+  const { errors, isValid, handleChange, resetForm } = FormValidator({});
+  const currentUser = useContext(CurrentUserContext).user;
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    if (form === "edit") {
+      resetForm();
+      setUserName(currentUser.name);
+      setUserEmail(currentUser.email);
+      setFormValues({name: currentUser.name, email: currentUser.email})
+    }
+  }, [currentUser, resetForm]);
 
   const handleChangeValue = (e) => {
     const { name, value } = e.target;
     handleChange(e, ".form");
-
+    form === "edit" && name === "name"
+      ? setUserName(value)
+      : setUserEmail(value);
     setFormValues({
       ...formValues,
       [name]: value,
@@ -50,7 +54,7 @@ function Form({
             }`}
             placeholder="Имя"
             value={form === "edit" ? userName || "" : formValues.name || ""}
-            onChange={form === "edit" ? handleChangeName : handleChangeValue}
+            onChange={handleChangeValue}
             required
           />
           <span
@@ -71,7 +75,7 @@ function Form({
           }`}
           placeholder="E-mail"
           value={form === "edit" ? userEmail || "" : formValues.email || ""}
-          onChange={form === "edit" ? handleChangeEmail : handleChangeValue}
+          onChange={handleChangeValue}
           required
         />
         <span

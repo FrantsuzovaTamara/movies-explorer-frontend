@@ -19,13 +19,11 @@ function SearchForm({ onSubmit }) {
   };
 
   function handleChangeShortFilms(e) {
-    console.log(e.target.id, shortFilms)
     if (e.target.id === "off") {
       setShortFilms(false)
     } else {
       setShortFilms(true)
     }
-    console.log(e.target.id, shortFilms)
   }
 
   function submitForm(e) {

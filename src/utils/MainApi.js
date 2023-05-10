@@ -57,17 +57,6 @@ export const addMovieInApi = ({
   nameRU,
   nameEN,
 }) => {
-  console.log({country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    thumbnail,
-    movieId,
-    nameRU,
-    nameEN});
   return fetch(`${BASE_URL}/movies`, {
     method: "POST",
     headers: {

@@ -20,6 +20,8 @@ import Error from "../Error/Error";
 import * as MoviesApi from "../../utils/MoviesApi";
 import * as MainApi from "../../utils/MainApi";
 import * as Auth from "../../utils/Auth";
+import ErrorPopup from "../ErrorPopup/ErrorPopup";
+import { errorText } from "../../utils/constants";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -29,6 +31,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [moviesFromApi, setMoviesFromApi] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -49,6 +52,7 @@ function App() {
           setMoviesFromApi(moviesFromApi);
         })
         .catch((err) => {
+          setIsOpen(true);
           console.log(err);
         });
     }
@@ -66,6 +70,7 @@ function App() {
         navigate("/movies");
       })
       .catch((err) => {
+        setIsOpen(true);
         console.log(err);
       });
   }
@@ -76,6 +81,7 @@ function App() {
         navigate("/signin");
       })
       .catch((err) => {
+        setIsOpen(true);
         console.log(err);
       });
   }
@@ -93,18 +99,22 @@ function App() {
           }
         })
         .catch((err) => {
+          setIsOpen(true);
           console.log(err);
         });
     }
   }
 
   function handleUpdateUser(userData) {
+    console.log(userData);
     setIsLoading(true);
     MainApi.editProfileInfo(userData)
       .then((data) => {
-        setCurrentUser(data.user);
+        setCurrentUser(data);
+        navigate("/profile");
       })
       .catch((err) => {
+        setIsOpen(true);
         console.log(err);
       })
       .finally(() => {
@@ -122,12 +132,12 @@ function App() {
     navigate("/", { replace: true });
   }
 
-  function searchMovies(movies, name, shortFilms) {
+  function searchMovies(moviesArr, setArr, name, shortFilms) {
     setIsLoading(true);
     setMovies([]);
-    const searchedMovies = movies.filter((movie) => {
+    const searchedMovies = moviesArr.filter((movie) => {
       const rusName = movie.nameRU.toLowerCase();
-      const engName = movie.nameRU.toLowerCase();
+      const engName = movie.nameEN.toLowerCase();
       if (!shortFilms) {
         if (
           (rusName.includes(name) || engName.includes(name)) &&
@@ -144,16 +154,16 @@ function App() {
         }
       }
     });
-    setMovies(searchedMovies);
+    setArr(searchedMovies);
     setIsLoading(false);
   }
 
   function searchNewMovies(name, shortFilms) {
-    searchMovies(moviesFromApi, name, shortFilms);
+    searchMovies(moviesFromApi, setMovies, name, shortFilms);
   }
 
   function searchSavedMovies(name, shortFilms) {
-    searchMovies(savedMovies, name, shortFilms);
+    searchMovies(savedMovies, setSavedMovies, name, shortFilms);
   }
 
   function handleSaveMovie(movie) {
@@ -174,6 +184,7 @@ function App() {
         setSavedMovies([newMovie.movie, ...savedMovies]);
       })
       .catch((err) => {
+        setIsOpen(true);
         console.log(err);
       });
   }
@@ -184,8 +195,13 @@ function App() {
         setSavedMovies(savedMovies.filter((m) => m._id !== movie._id));
       })
       .catch((err) => {
+        setIsOpen(true);
         console.log(err);
       });
+  }
+
+  function handleClosePopup() {
+    setIsOpen(false);
   }
 
   return (
@@ -309,6 +325,8 @@ function App() {
           }
         />
       </Routes>
+
+      <ErrorPopup isOpen={isOpen} onClose={handleClosePopup} />
     </CurrentUserContext.Provider>
   );
 }

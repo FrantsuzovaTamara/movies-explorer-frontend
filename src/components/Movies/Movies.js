@@ -1,4 +1,5 @@
 import "./Movies.css";
+import { screenWidth } from "../../utils/constants";
 import { useEffect, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCard from "../MoviesCard/MoviesCard";
@@ -6,25 +7,39 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 
 function Movies({ isLading, movies, searchMovies, saveMovie, deleteMovie, savedMovies }) {
+  let cardInRow;
+  let numberOfMovies;
+
+  if (screenWidth >= 1280) {
+    cardInRow = 3;
+    numberOfMovies = 12;
+  } else if (screenWidth < 1280 && screenWidth >= 761) {
+    cardInRow = 2;
+    numberOfMovies = 8;
+  } else {
+    cardInRow = 2;
+    numberOfMovies = 5;
+  }
+  
   const moviesQuantity = movies.length;
-  const [lastMovie, setLastMovie] = useState(12);
+  const [lastMovie, setLastMovie] = useState(numberOfMovies);
   const [moviesOnPage, setMoviesOnPage] = useState([]);
 
   useEffect(() => {
-    setLastMovie(12);
+    setLastMovie(numberOfMovies);
   }, [movies]);
 
   useEffect(() => {
-    if (moviesQuantity !== 0 && moviesQuantity < 13) {
+    if (moviesQuantity !== 0 && moviesQuantity <= numberOfMovies) {
       setMoviesOnPage(movies);
-    } else if (moviesQuantity > 11) {
+    } else if (moviesQuantity >= numberOfMovies) {
       setMoviesOnPage(movies.slice(0, lastMovie));
     }
   }, [movies, lastMovie]);
 
   function addMoreMovie() {
-    if (movies.length >= lastMovie + 3) {
-      setLastMovie(lastMovie + 3);
+    if (movies.length >= lastMovie + cardInRow) {
+      setLastMovie(lastMovie + cardInRow);
     } else {
       setLastMovie(moviesQuantity);
     }

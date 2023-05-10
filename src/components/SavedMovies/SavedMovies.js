@@ -5,15 +5,16 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 
 function SavedMovies({ isLoading, savedMovies, deleteMovie, searchMovies }) {
-  
+  const savedMoviesQuantity = savedMovies.length;
+
   return (
     <main>
-      <SearchForm searchMovies={searchMovies} />
+      <SearchForm onSubmit={searchMovies} />
       <section className="saved-movies">
         {isLoading ? (
           <Preloader />
-        ) : !savedMovies ? (
-          <p className="saved-movies__text">Сохранённых фильмов пока нет</p>
+        ) : savedMoviesQuantity === 0 ? (
+          <p className="saved-movies__text">Фильмы не найдены</p>
         ) : (
           <>
             <MoviesCardList>
