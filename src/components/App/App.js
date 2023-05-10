@@ -21,7 +21,6 @@ import * as MoviesApi from "../../utils/MoviesApi";
 import * as MainApi from "../../utils/MainApi";
 import * as Auth from "../../utils/Auth";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
-import { errorText } from "../../utils/constants";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
