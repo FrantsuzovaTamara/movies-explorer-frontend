@@ -128,6 +128,7 @@ function App() {
       password: "",
     });
     setLoggedIn(false);
+    setMovies([]);
     navigate("/", { replace: true });
   }
 

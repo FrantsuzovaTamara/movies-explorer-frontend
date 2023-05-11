@@ -9,7 +9,8 @@ export const register = (name, email, password) => {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({name, email, password})
   }).then(getResponse);
@@ -20,7 +21,8 @@ export const authorize = (email, password) => {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({email, password})
   }).then(getResponse);
@@ -33,6 +35,7 @@ export const checkToken = (token) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
     }
   }).then(getResponse);
 }

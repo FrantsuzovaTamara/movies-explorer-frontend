@@ -11,6 +11,7 @@ function SearchForm({ onSubmit }) {
   const handleChangeValue = (e) => {
     const { name, value } = e.target;
     handleChange(e, ".search");
+    console.log(name, value);
 
     setFormValues({
       ...formValues,

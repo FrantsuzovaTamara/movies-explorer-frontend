@@ -1,7 +1,6 @@
 import "./ErrorPopup.css";
 
 function ErrorPopup({ isOpen, onClose }) {
-  console.log(isOpen)
   return (
     <div className={`popup${isOpen ? " popup_opened" : ""}`}>
       <button
