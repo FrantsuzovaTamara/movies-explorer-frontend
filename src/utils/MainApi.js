@@ -1,11 +1,11 @@
-import BASE_URL from "./constants";
+import { BASE_URL } from "./constants";
 const contentType = "application/json";
 
 const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   } else {
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(res.status);
   }
 };
 

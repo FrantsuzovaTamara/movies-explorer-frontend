@@ -5,28 +5,42 @@ import { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 
 function Form({ buttonText, textUnderButton, linkText, link, onSubmit, form }) {
-  const [formValues, setFormValues] = useState([]);
-
   const { errors, isValid, handleChange, resetForm } = FormValidator({});
-  const currentUser = useContext(CurrentUserContext).user;
+
+  const currentUser = useContext(CurrentUserContext);
+
+  const [formValues, setFormValues] = useState([]);
+  const [isFormValid, setIsFormValid] = useState(false);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     if (form === "edit") {
       resetForm();
+      setIsFormValid(false);
       setUserName(currentUser.name);
       setUserEmail(currentUser.email);
-      setFormValues({name: currentUser.name, email: currentUser.email})
+      setFormValues({ name: currentUser.name, email: currentUser.email });
     }
   }, [currentUser, resetForm]);
+
+  useEffect(() => {
+    if (form === "edit") {
+      isValid &&
+      (userName !== currentUser.name || userEmail !== currentUser.email)
+        ? setIsFormValid(true)
+        : setIsFormValid(false);
+    }
+  }, [isValid, userName, userEmail, currentUser]);
 
   const handleChangeValue = (e) => {
     const { name, value } = e.target;
     handleChange(e, ".form");
+
     form === "edit" && name === "name"
       ? setUserName(value)
       : setUserEmail(value);
+
     setFormValues({
       ...formValues,
       [name]: value,
@@ -37,7 +51,7 @@ function Form({ buttonText, textUnderButton, linkText, link, onSubmit, form }) {
     e.preventDefault();
     onSubmit(formValues);
   }
-
+  
   return (
     <form className="form" onSubmit={submitForm} noValidate>
       {(form === "register" || form === "edit") && (
@@ -70,6 +84,7 @@ function Form({ buttonText, textUnderButton, linkText, link, onSubmit, form }) {
           id="email"
           type="email"
           name="email"
+          pattern="^.+@.+\..+$"
           className={`form__input${
             errors.email ? " form__input_type_error" : ""
           }`}
@@ -120,9 +135,13 @@ function Form({ buttonText, textUnderButton, linkText, link, onSubmit, form }) {
         }
       >
         <button
-          className={`form__button${isValid ? " form__button_active" : ""}`}
+          className={`form__button${
+            (form === "edit" ? isFormValid : isValid)
+              ? " form__button_active"
+              : ""
+          }`}
           type="submit"
-          disabled={!isValid}
+          disabled={form === "edit" ? !isFormValid : !isValid}
         >
           {buttonText}
         </button>

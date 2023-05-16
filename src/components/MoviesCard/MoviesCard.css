@@ -3,4 +3,5 @@
 @import url(./movies-card/__info/movies__info.css);
 @import url(./movies-card/__name/movies__name.css);
 @import url(./movies-card/__duration/movies__duration.css);
+@import url(./movies-card/__link/movies__link.css);
 @import url(./movies-card/__poster/movies__poster.css);

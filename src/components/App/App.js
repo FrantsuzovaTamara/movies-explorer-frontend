@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
@@ -16,23 +16,89 @@ import Register from "../Register/Register";
 import EditProfile from "../EditProfile/EditProfile";
 import Footer from "../Footer/Footer";
 import Error from "../Error/Error";
+import ErrorPopup from "../ErrorPopup/ErrorPopup";
+import Preloader from "../Preloader/Preloader";
+import { MAX_SHORT_FILM_DURATION } from "../../utils/constants";
 
 import * as MoviesApi from "../../utils/MoviesApi";
 import * as MainApi from "../../utils/MainApi";
 import * as Auth from "../../utils/Auth";
-import ErrorPopup from "../ErrorPopup/ErrorPopup";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [movies, setMovies] = useState([]);
+  const [searchedNewMovies, setSearchedNewMovies] = useState([]);
+  const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
+  const [inputValueNewMovies, setInputValueNewMovies] = useState("");
+  const [inputValueSavedMovies, setInputValueSavedMovies] = useState("");
+  const [shortNewMovies, setShortNewMovies] = useState(false);
+  const [shortSavedMovies, setShortSavedMovies] = useState(false);
+
   const [savedMovies, setSavedMovies] = useState([]);
   const [moviesFromApi, setMoviesFromApi] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  let location = useLocation();
+
+  // Форматирует данные о фильмах
+
+  function formatMoviesArr(moviesArr) {
+    return moviesArr.map((movie) => {
+      return {
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co/${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      };
+    });
+  }
+
+  function formatMovieInfo(movie) {
+    return {
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: movie.image,
+      trailerLink: movie.trailerLink,
+      thumbnail: movie.thumbnail,
+      movieId: movie.movieId,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    };
+  }
+
+  // Получает данные из локального хранилища
+
+  function getItemsFromLocalStorage() {
+    localStorage.getItem("searchingNewMoviesResults") !== null
+      ? setSearchedNewMovies(
+          JSON.parse(localStorage.getItem("searchingNewMoviesResults"))
+        )
+      : setSearchedNewMovies([]);
+
+    localStorage.getItem("inputValueNewMovies") !== null
+      ? setInputValueNewMovies(localStorage.getItem("inputValueNewMovies"))
+      : setInputValueNewMovies("");
+      
+    localStorage.getItem("shortNewMovies") !== null
+      ? setShortNewMovies(localStorage.getItem("shortNewMovies") === "false" ? false : true)
+      : setShortNewMovies(false);
+  }
+
+  // Проверяет токен и подгружает данные с api
 
   useEffect(() => {
     handleTokenCheck();
@@ -40,24 +106,39 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
+      setIsLoading(true);
       Promise.all([
         MainApi.getUserInfo(),
         MainApi.getSavedMovies(),
         MoviesApi.getMovies(),
       ])
-        .then(([userData, savedMovies, moviesFromApi]) => {
-          setCurrentUser(userData);
-          setSavedMovies(savedMovies.userMovies);
-          setMoviesFromApi(moviesFromApi);
+        .then(([userData, savedMoviesFromMainApi, moviesFromMoviesApi]) => {
+          setCurrentUser(userData.user);
+          setSavedMovies(savedMoviesFromMainApi.userMovies);
+          setMoviesFromApi(formatMoviesArr(moviesFromMoviesApi));
+          setSearchedSavedMovies(savedMoviesFromMainApi.userMovies);
+          setInputValueSavedMovies("");
+          setShortSavedMovies(false);
         })
         .catch((err) => {
           setIsOpen(true);
-          console.log(err);
+          setError(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
   }, [loggedIn]);
 
+  useEffect(() => {
+    getItemsFromLocalStorage();
+    setSearchedSavedMovies(savedMovies);
+  }, [location]);
+
+  // Авторизация
+
   function handleLogin({ email, password }) {
+    setIsLoading(true);
     return Auth.authorize(email, password)
       .then((data) => {
         localStorage.setItem("jwt", JSON.stringify(data.token));
@@ -66,28 +147,40 @@ function App() {
           email: email,
           password: password,
         });
-        navigate("/movies");
+        navigate("/");
       })
       .catch((err) => {
         setIsOpen(true);
-        console.log(err);
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
+  // Регистрация
+
   function handleRegister({ name, email, password }) {
+    setIsLoading(true);
     return Auth.register(name, email, password)
       .then(() => {
         navigate("/signin");
       })
       .catch((err) => {
         setIsOpen(true);
-        console.log(err);
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
+
+  //Проверка токена
 
   function handleTokenCheck() {
     const jwt = JSON.parse(localStorage.getItem("jwt"));
     if (jwt) {
+      setIsLoading(true);
       Auth.checkToken(jwt)
         .then((res) => {
           if (res) {
@@ -95,31 +188,38 @@ function App() {
               email: res.email,
             });
             setLoggedIn(true);
+            navigate(location);
           }
         })
         .catch((err) => {
           setIsOpen(true);
-          console.log(err);
+          setError(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
   }
 
+  // Обновление данных пользователя
+
   function handleUpdateUser(userData) {
-    console.log(userData);
     setIsLoading(true);
     MainApi.editProfileInfo(userData)
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data.user);
         navigate("/profile");
       })
       .catch((err) => {
         setIsOpen(true);
-        console.log(err);
+        setError(err);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }
+
+  // Выход из аккаунта
 
   function signOut() {
     localStorage.removeItem("jwt");
@@ -128,77 +228,122 @@ function App() {
       password: "",
     });
     setLoggedIn(false);
-    setMovies([]);
+    setSearchedNewMovies([]);
+    setSearchedSavedMovies([]);
+    setSavedMovies([]);
+    localStorage.clear();
     navigate("/", { replace: true });
   }
 
-  function searchMovies(moviesArr, setArr, name, shortFilms) {
-    setIsLoading(true);
-    setMovies([]);
-    const searchedMovies = moviesArr.filter((movie) => {
+  // Поиск фильмов
+
+  function filterMovies(moviesArr, shortFilms, name) {
+    return moviesArr.filter((movie) => {
       const rusName = movie.nameRU.toLowerCase();
-      const engName = movie.nameEN.toLowerCase();
-      if (!shortFilms) {
+      if (shortFilms) {
         if (
-          (rusName.includes(name) || engName.includes(name)) &&
-          movie.duration > 40
+          rusName.includes(name) &&
+          movie.duration <= MAX_SHORT_FILM_DURATION
         ) {
-          return movie;
+          return formatMovieInfo(movie);
         }
       } else {
         if (
-          (rusName.includes(name) || engName.includes(name)) &&
-          movie.duration <= 40
+          rusName.includes(name) &&
+          movie.duration > MAX_SHORT_FILM_DURATION
         ) {
-          return movie;
+          return formatMovieInfo(movie);
         }
       }
     });
-    setArr(searchedMovies);
+  }
+
+  function searchMovies(
+    moviesArr,
+    setSearchedMovies,
+    isNewMovies,
+    name,
+    shortFilms
+  ) {
+    setIsLoading(true);
+
+    const searchedMoviesArr = filterMovies(moviesArr, shortFilms, name);
+    setSearchedMovies(searchedMoviesArr);
+    if (isNewMovies) {
+      setShortNewMovies(shortFilms);
+      setInputValueNewMovies(name);
+      localStorage.setItem(
+        "searchingNewMoviesResults",
+        JSON.stringify(searchedMoviesArr)
+      );
+      localStorage.setItem("shortNewMovies", JSON.stringify(shortFilms));
+      localStorage.setItem("inputValueNewMovies", name);
+    }
+
     setIsLoading(false);
   }
 
   function searchNewMovies(name, shortFilms) {
-    searchMovies(moviesFromApi, setMovies, name, shortFilms);
+    searchMovies(moviesFromApi, setSearchedNewMovies, true, name, shortFilms);
   }
 
   function searchSavedMovies(name, shortFilms) {
-    searchMovies(savedMovies, setSavedMovies, name, shortFilms);
+    searchMovies(savedMovies, setSearchedSavedMovies, false, name, shortFilms);
   }
 
+  // Добавление фильма в сохранённые
+
   function handleSaveMovie(movie) {
-    MainApi.addMovieInApi({
-      country: movie.country,
-      director: movie.director,
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description,
-      image: `https://api.nomoreparties.co/${movie.image.url}`,
-      trailerLink: movie.trailerLink,
-      thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
-      movieId: movie.id,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
-    })
+    setIsLoading(true);
+    MainApi.addMovieInApi(formatMovieInfo(movie))
       .then((newMovie) => {
         setSavedMovies([newMovie.movie, ...savedMovies]);
       })
       .catch((err) => {
         setIsOpen(true);
-        console.log(err);
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
-  function deleteMovie(movie) {
+  // Удаление фильма из сохранённых
+
+  function deleteMovie(movie, searchedMovies, isDeleteFromSavedMovies) {
+    setIsLoading(true);
     MainApi.deleteMovieInApi(movie._id)
       .then((res) => {
+        if (isDeleteFromSavedMovies) {
+          const moviesArrAfterDelete = searchedMovies.filter(
+            (m) => m._id !== movie._id
+          );
+          setSearchedSavedMovies(moviesArrAfterDelete);
+          localStorage.setItem(
+            "searchingSavedMoviesResults",
+            moviesArrAfterDelete
+          );
+        }
         setSavedMovies(savedMovies.filter((m) => m._id !== movie._id));
       })
       .catch((err) => {
         setIsOpen(true);
-        console.log(err);
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
+
+  function deleteMovieFromMovies(movie) {
+    deleteMovie(movie, searchedNewMovies, false);
+  }
+
+  function deleteMovieFromSavedMovies(movie) {
+    deleteMovie(movie, searchedSavedMovies, true);
+  }
+
+  // Закрывает попап с ошибкой
 
   function handleClosePopup() {
     setIsOpen(false);
@@ -212,7 +357,7 @@ function App() {
           element={
             <>
               <Header>
-                <UnauthorizedHeader />
+                <UnauthorizedHeader loggedIn={loggedIn} />
               </Header>
               <Main />
               <Footer />
@@ -228,12 +373,13 @@ function App() {
                   <UnauthorizedHeader auth={true} pointed="films" />
                 </Header>
                 <Movies
+                  searchedMovies={searchedNewMovies}
+                  savedMovies={savedMovies}
                   searchMovies={searchNewMovies}
                   saveMovie={handleSaveMovie}
-                  deleteMovie={deleteMovie}
-                  movies={movies}
-                  savedMovies={savedMovies}
-                  isLoading={isLoading}
+                  deleteMovie={deleteMovieFromMovies}
+                  shortMovies={shortNewMovies}
+                  inputValue={inputValueNewMovies}
                 />
                 <Footer />
               </>
@@ -249,10 +395,11 @@ function App() {
                   <UnauthorizedHeader auth={true} pointed="saved" />
                 </Header>
                 <SavedMovies
+                  searchedMovies={searchedSavedMovies}
                   searchMovies={searchSavedMovies}
-                  deleteMovie={deleteMovie}
-                  savedMovies={savedMovies}
-                  isLoading={isLoading}
+                  deleteMovie={deleteMovieFromSavedMovies}
+                  shortMovies={shortSavedMovies}
+                  inputValue={inputValueSavedMovies}
                 />
                 <Footer />
               </>
@@ -289,31 +436,23 @@ function App() {
         <Route
           path="/signin"
           element={
-            loggedIn ? (
-              <Navigate to="/movies" replace />
-            ) : (
-              <>
-                <Header headerClass="_form">
-                  <FormHeader greeting="Рады видеть!" />
-                </Header>
-                <Login handleLogin={handleLogin} />
-              </>
-            )
+            <>
+              <Header headerClass="_form">
+                <FormHeader greeting="Рады видеть!" />
+              </Header>
+              <Login handleLogin={handleLogin} />
+            </>
           }
         />
         <Route
           path="/signup"
           element={
-            loggedIn ? (
-              <Navigate to="/movies" replace />
-            ) : (
-              <>
-                <Header headerClass="_form">
-                  <FormHeader greeting="Добро пожаловать!" />
-                </Header>
-                <Register handleRegister={handleRegister} />
-              </>
-            )
+            <>
+              <Header headerClass="_form">
+                <FormHeader greeting="Добро пожаловать!" />
+              </Header>
+              <Register handleRegister={handleRegister} />
+            </>
           }
         />
         <Route
@@ -326,7 +465,13 @@ function App() {
         />
       </Routes>
 
-      <ErrorPopup isOpen={isOpen} onClose={handleClosePopup} />
+      <Preloader isLoading={isLoading} />
+
+      <ErrorPopup
+        isOpen={isOpen}
+        onClose={handleClosePopup}
+        errorStatus={error}
+      />
     </CurrentUserContext.Provider>
   );
 }

@@ -1,37 +1,36 @@
 import "./SearchForm.css";
-import { useState } from "react";
-import FormValidator from "../../utils/FormValidators";
+import { useState, useEffect } from "react";
 
-function SearchForm({ onSubmit }) {
-  const [formValues, setFormValues] = useState([]);
-  const [shortFilms, setShortFilms] = useState(false);
+function SearchForm({ onSubmit, shortMovies, inputValue }) {
+  const [formValue, setFormValue] = useState(inputValue);
+  const [shortFilms, setShortFilms] = useState(shortMovies);
+  const [isValid, setIsValid] = useState(false);
 
-  const { isValid, handleChange } = FormValidator({});
+  useEffect(() => {
+    formValue.length !== 0 &&
+    (formValue !== inputValue || shortFilms !== shortMovies)
+      ? setIsValid(true)
+      : setIsValid(false);
+  }, [formValue, shortFilms]);
 
   const handleChangeValue = (e) => {
-    const { name, value } = e.target;
-    handleChange(e, ".search");
-    console.log(name, value);
-
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
+    const value = e.target.value;
+    setFormValue(value);
   };
 
   function handleChangeShortFilms(e) {
     if (e.target.id === "off") {
-      setShortFilms(false)
+      setShortFilms(false);
     } else {
-      setShortFilms(true)
+      setShortFilms(true);
     }
   }
 
   function submitForm(e) {
     e.preventDefault();
-    onSubmit(formValues.movie.toLowerCase(), shortFilms);
+    onSubmit(formValue.toLowerCase(), shortFilms);
   }
-
+  
   return (
     <form className="search" onSubmit={submitForm}>
       <div className="search__find-film">
@@ -42,7 +41,7 @@ function SearchForm({ onSubmit }) {
           type="text"
           id="find-film"
           placeholder="Фильм"
-          value={formValues.movie || ""}
+          value={formValue || ""}
           onChange={handleChangeValue}
         />
         <button
@@ -62,7 +61,7 @@ function SearchForm({ onSubmit }) {
             type="radio"
             name="short-films"
             onClick={handleChangeShortFilms}
-            defaultChecked={true}
+            defaultChecked={shortFilms ? false : true}
           />
           <input
             className="search__item"
@@ -70,6 +69,7 @@ function SearchForm({ onSubmit }) {
             type="radio"
             name="short-films"
             onClick={handleChangeShortFilms}
+            defaultChecked={shortFilms ? true : false}
           />
         </div>
       </div>

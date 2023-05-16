@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./UnauthorizedHeader.css";
 import Navigation from "../../Navigation/Navigation";
 
-function UnauthorizedHeader({ auth, pointed }) {
+function UnauthorizedHeader({ auth, pointed, loggedIn }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function openMenu() {
@@ -99,10 +99,20 @@ function UnauthorizedHeader({ auth, pointed }) {
         </>
       ) : (
         <nav className="header__entrence">
-          <NavLink to="/signup" className="header__button header__button_link_register">
-            Регистрация
-          </NavLink>
-          <NavLink to="/signin" className="header__button header__button_link_login">
+          {loggedIn ? (
+            <></>
+          ) : (
+            <NavLink
+              to={"/signup"}
+              className="header__button header__button_link_register"
+            >
+              Регистрация
+            </NavLink>
+          )}
+          <NavLink
+            to={loggedIn ? "/movies" : "/signin"}
+            className="header__button header__button_link_login"
+          >
             Войти
           </NavLink>
         </nav>

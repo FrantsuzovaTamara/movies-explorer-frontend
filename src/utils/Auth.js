@@ -1,7 +1,7 @@
-import BASE_URL from "./constants";
+import { BASE_URL } from "./constants";
 
 const getResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  return res.ok ? res.json() : Promise.reject(res.status);
 };
 
 export const register = (name, email, password) => {
