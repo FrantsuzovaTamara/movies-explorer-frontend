@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate, useLocation } from "react-router-dom";
 
 import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
@@ -436,23 +436,31 @@ function App() {
         <Route
           path="/signin"
           element={
+            loggedIn ? (
+              <Navigate to="/movies" replace />
+            ) : (
             <>
               <Header headerClass="_form">
                 <FormHeader greeting="Рады видеть!" />
               </Header>
               <Login handleLogin={handleLogin} />
             </>
+            )
           }
         />
         <Route
           path="/signup"
           element={
+            loggedIn ? (
+              <Navigate to="/movies" replace />
+            ) : (
             <>
               <Header headerClass="_form">
                 <FormHeader greeting="Добро пожаловать!" />
               </Header>
               <Register handleRegister={handleRegister} />
             </>
+            )
           }
         />
         <Route
