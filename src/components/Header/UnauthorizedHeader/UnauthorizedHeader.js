@@ -99,16 +99,12 @@ function UnauthorizedHeader({ auth, pointed, loggedIn }) {
         </>
       ) : (
         <nav className="header__entrence">
-          {loggedIn ? (
-            <></>
-          ) : (
-            <NavLink
-              to={"/signup"}
-              className="header__button header__button_link_register"
-            >
-              Регистрация
-            </NavLink>
-          )}
+          <NavLink
+            to={loggedIn ? "/movies" : "/signup"}
+            className="header__button header__button_link_register"
+          >
+            Регистрация
+          </NavLink>
           <NavLink
             to={loggedIn ? "/movies" : "/signin"}
             className="header__button header__button_link_login"
