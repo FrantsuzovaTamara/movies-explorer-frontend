@@ -147,7 +147,7 @@ function App() {
           email: email,
           password: password,
         });
-        navigate("/");
+        navigate("/movies");
       })
       .catch((err) => {
         setIsOpen(true);
@@ -164,7 +164,7 @@ function App() {
     setIsLoading(true);
     return Auth.register(name, email, password)
       .then(() => {
-        navigate("/signin");
+        handleLogin({ email, password });
       })
       .catch((err) => {
         setIsOpen(true);
@@ -209,6 +209,8 @@ function App() {
       .then((data) => {
         setCurrentUser(data.user);
         navigate("/profile");
+        setIsOpen(true);
+        setError(200);
       })
       .catch((err) => {
         setIsOpen(true);

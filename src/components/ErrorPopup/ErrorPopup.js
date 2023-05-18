@@ -6,12 +6,16 @@ import {
   UNAUTH_ERR_MESSAGE,
   FORBID_ERR_MESSAGE,
   MAIN_ERR_MESSAGE,
+  SUCCESS_MESSAGE,
 } from "../../utils/constants";
 
 function ErrorPopup({ isOpen, onClose, errorStatus }) {
   let errorText;
-
+  
   switch (errorStatus) {
+    case 200:
+      errorText = SUCCESS_MESSAGE;
+      break;
     case 404:
       errorText = NOT_FOUND_ERR_MESSAGE;
       break;

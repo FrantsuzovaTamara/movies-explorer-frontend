@@ -8,6 +8,7 @@ if (STATUS === "production") {
   BASE_URL = "http://localhost:3000";
 }
 
+const SUCCESS_MESSAGE = 'Данные успешно изменены';
 const VALID_ERR_MESSAGE = 'Проверьте введённые данные';
 const CONFL_ERR_MESSAGE = 'Пользователь с такой почтой уже зарегистрирован';
 const NOT_FOUND_ERR_MESSAGE = 'Данные не найдены';
@@ -33,6 +34,7 @@ if (SCREEN_WIDTH >= 1280) {
 
 export {
   BASE_URL,
+  SUCCESS_MESSAGE,
   VALID_ERR_MESSAGE,
   CONFL_ERR_MESSAGE,
   NOT_FOUND_ERR_MESSAGE,
