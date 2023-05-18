@@ -18,7 +18,7 @@ import Footer from "../Footer/Footer";
 import Error from "../Error/Error";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
 import Preloader from "../Preloader/Preloader";
-import { MAX_SHORT_FILM_DURATION } from "../../utils/constants";
+import { MAX_SHORT_FILM_DURATION } from "../../utils/config";
 
 import * as MoviesApi from "../../utils/MoviesApi";
 import * as MainApi from "../../utils/MainApi";
@@ -471,6 +471,12 @@ function App() {
             <>
               <Error />
             </>
+          }
+        />
+        <Route
+          path={location.pathname}
+          element={
+            <Navigate to="/404" replace />
           }
         />
       </Routes>

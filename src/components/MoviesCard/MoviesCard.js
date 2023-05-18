@@ -1,6 +1,6 @@
 import "./MoviesCard.css";
 import { NavLink } from "react-router-dom";
-import { MINUTES_IN_HOUR } from "../../utils/constants";
+import { MINUTES_IN_HOUR } from "../../utils/config";
 
 function MoviesCard({ children, name, duration, poster, trailerLink }) {
   return (

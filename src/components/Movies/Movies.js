@@ -2,7 +2,7 @@ import "./Movies.css";
 import {
   MOVIES_IN_ROW,
   NUMBER_OF_MOVIES_PER_PAGE,
-} from "../../utils/constants";
+} from "../../utils/config";
 import { useEffect, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCard from "../MoviesCard/MoviesCard";
