@@ -3,9 +3,9 @@ import { useState } from "react";
 import "./UnauthorizedHeader.css";
 import Navigation from "../../Navigation/Navigation";
 
-function UnauthorizedHeader({ auth, pointed, loggedIn }) {
+function UnauthorizedHeader({ pointed, loggedIn, location }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
   function openMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
@@ -16,7 +16,7 @@ function UnauthorizedHeader({ auth, pointed, loggedIn }) {
 
   return (
     <>
-      {auth ? (
+      {loggedIn ? (
         <>
           {isMenuOpen && <Navigation closeMenu={closeMenu} />}
           <ul
@@ -44,8 +44,8 @@ function UnauthorizedHeader({ auth, pointed, loggedIn }) {
               </li>
             )}
             <li
-              className={`header__menu-item ${
-                isMenuOpen ? "header__menu-item_opened" : ""
+              className={`header__menu-item${location.pathname === "/" && !isMenuOpen ? " header__menu-item_place_main" : ""}${
+                isMenuOpen ? " header__menu-item_opened" : ""
               }`}
             >
               <NavLink
@@ -53,16 +53,16 @@ function UnauthorizedHeader({ auth, pointed, loggedIn }) {
                 onClick={closeMenu}
                 className={
                   pointed === "films"
-                    ? "header__menu-link header__menu-link_pointed"
-                    : "header__menu-link"
+                    ? `header__menu-link header__menu-link_pointed${location.pathname === "/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
+                    : `header__menu-link${location.pathname === "/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
                 }
               >
                 Фильмы
               </NavLink>
             </li>
             <li
-              className={`header__menu-item ${
-                isMenuOpen ? "header__menu-item_opened" : ""
+              className={`header__menu-item${location.pathname === "/" && !isMenuOpen ? " header__menu-item_place_main" : ""}${
+                isMenuOpen ? " header__menu-item_opened" : ""
               }`}
             >
               <NavLink
@@ -70,8 +70,8 @@ function UnauthorizedHeader({ auth, pointed, loggedIn }) {
                 onClick={closeMenu}
                 className={
                   pointed === "saved"
-                    ? "header__menu-link header__menu-link_pointed"
-                    : "header__menu-link"
+                    ? `header__menu-link header__menu-link_pointed${location.pathname === "/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
+                    : `header__menu-link${location.pathname === "/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
                 }
               >
                 Сохранённые фильмы
@@ -81,8 +81,8 @@ function UnauthorizedHeader({ auth, pointed, loggedIn }) {
           <NavLink
             to="/profile"
             onClick={closeMenu}
-            className={`header__account ${
-              isMenuOpen ? "header__account_opened" : ""
+            className={`header__account${location.pathname === "/" && !isMenuOpen ? " header__accaunt_place_main" : ""}${
+              isMenuOpen ? " header__account_opened" : ""
             }`}
           >
             Аккаунт
@@ -90,8 +90,8 @@ function UnauthorizedHeader({ auth, pointed, loggedIn }) {
           </NavLink>
           {!isMenuOpen && (
             <button
-              className={`header__menu ${
-                isMenuOpen ? "header__menu_opened" : ""
+              className={`header__menu${location.pathname === "/" && !isMenuOpen ? " header__menu_place_main" : ""}${
+                isMenuOpen ? " header__menu_opened" : ""
               }`}
               onClick={openMenu}
             ></button>
@@ -100,13 +100,13 @@ function UnauthorizedHeader({ auth, pointed, loggedIn }) {
       ) : (
         <nav className="header__entrence">
           <NavLink
-            to={loggedIn ? "/movies" : "/signup"}
+            to={"/signup"}
             className="header__button header__button_link_register"
           >
             Регистрация
           </NavLink>
           <NavLink
-            to={loggedIn ? "/movies" : "/signin"}
+            to={"/signin"}
             className="header__button header__button_link_login"
           >
             Войти

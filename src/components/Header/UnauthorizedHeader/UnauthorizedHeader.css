@@ -1,12 +1,16 @@
 @import url(./unauth-header/__menu/header__menu.css);
+@import url(./unauth-header/__menu/_place/_main/header__menu_place_main.css);
 @import url(./unauth-header/__menu/_opened/header__menu_opened.css);
 @import url(./unauth-header/__menu-items/header__menu-items.css);
 @import url(./unauth-header/__menu-items/_opened/header__menu-items_opened.css);
 @import url(./unauth-header/__menu-item/header__menu-item.css);
+@import url(./unauth-header/__menu-item/_place/_main/header__menu-item_place_main.css);
 @import url(./unauth-header/__menu-item/_opened/header__menu-item_opened.css);
 @import url(./unauth-header/__menu-link/header__menu-link.css);
+@import url(./unauth-header/__menu-link/_place/_main/header__menu-link_place_main.css);
 @import url(./unauth-header/__menu-link/_pointed/header__menu-link_pointed.css);
 @import url(./unauth-header/__account/header__account.css);
+@import url(./unauth-header/__account/_place/_main/header__account_place_main.css);
 @import url(./unauth-header/__account/_opened/header__account_opened.css);
 @import url(./unauth-header/__account-icon/header__account-icon.css);
 

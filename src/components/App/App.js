@@ -357,7 +357,7 @@ function App() {
           element={
             <>
               <Header>
-                <UnauthorizedHeader loggedIn={loggedIn} />
+                <UnauthorizedHeader loggedIn={loggedIn} location={location} />
               </Header>
               <Main />
               <Footer />
@@ -370,7 +370,7 @@ function App() {
             <ProtectedRoute loggedIn={loggedIn}>
               <>
                 <Header headerClass="_auth">
-                  <UnauthorizedHeader auth={true} pointed="films" />
+                  <UnauthorizedHeader loggedIn={loggedIn} pointed="films" location={location} />
                 </Header>
                 <Movies
                   searchedMovies={searchedNewMovies}
@@ -392,7 +392,7 @@ function App() {
             <ProtectedRoute loggedIn={loggedIn}>
               <>
                 <Header headerClass="_auth">
-                  <UnauthorizedHeader auth={true} pointed="saved" />
+                  <UnauthorizedHeader loggedIn={loggedIn} pointed="saved" location={location} />
                 </Header>
                 <SavedMovies
                   searchedMovies={searchedSavedMovies}
@@ -412,7 +412,7 @@ function App() {
             <ProtectedRoute loggedIn={loggedIn}>
               <>
                 <Header headerClass="_auth">
-                  <UnauthorizedHeader auth={true} />
+                  <UnauthorizedHeader loggedIn={loggedIn} location={location} />
                 </Header>
                 <Profile signOut={signOut} />
                 <Footer />

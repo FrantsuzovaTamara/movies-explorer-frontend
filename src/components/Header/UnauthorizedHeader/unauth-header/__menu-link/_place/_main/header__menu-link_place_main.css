@@ -1,0 +1,7 @@
+.header__menu-link_place_main {
+  color: white;
+}
+
+.header__menu-item:hover > .header__menu-link_place_main {
+  color: #2be080;
+}
