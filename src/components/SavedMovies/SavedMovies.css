@@ -1,2 +1,3 @@
 @import url(./saved-movies/saved-movies.css);
+@import url(./saved-movies/__text/saved-movies__text.css);
 @import url(./saved-movies/__delete-button/saved-movies__delete-button.css);

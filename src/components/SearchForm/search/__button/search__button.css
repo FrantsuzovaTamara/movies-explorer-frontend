@@ -1,18 +1,14 @@
 .search__button {
   width: 58.65px;
   height: 34px;
-  background: #ff6838;
+  background: #f2f2f2;
   border: none;
   border-radius: 48px;
   font-weight: 500;
   font-size: 11px;
   line-height: 18px;
   text-align: center;
-  color: #ffffff;
-  transition: background-color 300ms ease;
-  cursor: pointer;
-}
-
-.search__button:hover {
-  background-color: #2BE080;
+  color: #000;
+  transition: background-color 300ms ease, color 300ms ease;
+  cursor: not-allowed;
 }

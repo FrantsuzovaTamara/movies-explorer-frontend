@@ -1,0 +1,9 @@
+.search__button_active {
+  background: #ff6838;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.search__button_active:hover {
+  background-color: #2be080;
+}

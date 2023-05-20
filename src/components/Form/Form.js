@@ -1,16 +1,45 @@
-import "./Form.css";
-import { useState } from "react";
-import FormValidator from "../../utils/FormValidators";
 import { NavLink } from "react-router-dom";
+import "./Form.css";
+import FormValidator from "../../utils/FormValidators";
+import { useContext, useEffect, useState } from "react";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 
-function Form({ buttonText, textUnderButton, linkText, link }) {
+function Form({ buttonText, textUnderButton, linkText, link, onSubmit, form }) {
+  const { errors, isValid, handleChange, resetForm } = FormValidator({});
+
+  const currentUser = useContext(CurrentUserContext);
+
   const [formValues, setFormValues] = useState([]);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
 
-  const { errors, isValid, handleChange } = FormValidator({});
+  useEffect(() => {
+    if (form === "edit") {
+      resetForm();
+      setIsFormValid(false);
+      setUserName(currentUser.name);
+      setUserEmail(currentUser.email);
+      setFormValues({ name: currentUser.name, email: currentUser.email });
+    }
+  }, [currentUser, resetForm]);
+
+  useEffect(() => {
+    if (form === "edit") {
+      isValid &&
+      (userName !== currentUser.name || userEmail !== currentUser.email)
+        ? setIsFormValid(true)
+        : setIsFormValid(false);
+    }
+  }, [isValid, userName, userEmail, currentUser]);
 
   const handleChangeValue = (e) => {
     const { name, value } = e.target;
     handleChange(e, ".form");
+
+    form === "edit" && name === "name"
+      ? setUserName(value)
+      : setUserEmail(value);
 
     setFormValues({
       ...formValues,
@@ -18,9 +47,14 @@ function Form({ buttonText, textUnderButton, linkText, link }) {
     });
   };
 
+  function submitForm(e) {
+    e.preventDefault();
+    onSubmit(formValues);
+  }
+  
   return (
-    <form className="form" noValidate>
-      {buttonText === "Зарегистрироваться" && (
+    <form className="form" onSubmit={submitForm} noValidate>
+      {(form === "register" || form === "edit") && (
         <label className="form__title">
           Имя
           <input
@@ -33,7 +67,7 @@ function Form({ buttonText, textUnderButton, linkText, link }) {
               errors.name ? " form__input_type_error" : ""
             }`}
             placeholder="Имя"
-            value={formValues.name || ""}
+            value={form === "edit" ? userName || "" : formValues.name || ""}
             onChange={handleChangeValue}
             required
           />
@@ -50,11 +84,12 @@ function Form({ buttonText, textUnderButton, linkText, link }) {
           id="email"
           type="email"
           name="email"
+          pattern="^.+@.+\..+$"
           className={`form__input${
             errors.email ? " form__input_type_error" : ""
           }`}
           placeholder="E-mail"
-          value={formValues.email || ""}
+          value={form === "edit" ? userEmail || "" : formValues.email || ""}
           onChange={handleChangeValue}
           required
         />
@@ -66,41 +101,47 @@ function Form({ buttonText, textUnderButton, linkText, link }) {
           {errors.email}
         </span>
       </label>
-      <label className="form__title">
-        Пароль
-        <input
-          id="password"
-          type="password"
-          name="password"
-          minLength="6"
-          maxLength="30"
-          className={`form__input${
-            errors.password ? " form__input_type_error" : ""
-          }`}
-          placeholder="Пароль"
-          value={formValues.password || ""}
-          onChange={handleChangeValue}
-          required
-        />
-        <span
-          className={`form__input-error${
-            errors.password ? " form__input-error_active" : ""
-          }`}
-        >
-          {errors.password}
-        </span>
-      </label>
+      {(form === "register" || form === "login") && (
+        <label className="form__title">
+          Пароль
+          <input
+            id="password"
+            type="password"
+            name="password"
+            minLength="6"
+            maxLength="30"
+            className={`form__input${
+              errors.password ? " form__input_type_error" : ""
+            }`}
+            placeholder="Пароль"
+            value={formValues.password || ""}
+            onChange={handleChangeValue}
+            required
+          />
+          <span
+            className={`form__input-error${
+              errors.password ? " form__input-error_active" : ""
+            }`}
+          >
+            {errors.password}
+          </span>
+        </label>
+      )}
       <div
         className={
-          buttonText === "Зарегистрироваться"
+          form === "register"
             ? "form__buttons form__buttons_link_register"
             : "form__buttons form__buttons_link_login"
         }
       >
         <button
-          className={`form__button${isValid ? " form__button_active" : ""}`}
+          className={`form__button${
+            (form === "edit" ? isFormValid : isValid)
+              ? " form__button_active"
+              : ""
+          }`}
           type="submit"
-          disabled={!isValid}
+          disabled={form === "edit" ? !isFormValid : !isValid}
         >
           {buttonText}
         </button>

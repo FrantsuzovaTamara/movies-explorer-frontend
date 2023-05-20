@@ -1,0 +1,5 @@
+@media screen and (max-width: 768px) {
+  .header__menu_place_main {
+    background-image: url(../../../../../../../images/header__menu_white.svg);
+  }
+}
