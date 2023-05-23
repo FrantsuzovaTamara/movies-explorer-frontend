@@ -31,7 +31,7 @@ function UnauthorizedHeader({ pointed, loggedIn, location }) {
                 }`}
               >
                 <NavLink
-                  to="/"
+                  to="/movies-explorer-frontend/"
                   onClick={closeMenu}
                   className={
                     pointed === "films"
@@ -44,34 +44,34 @@ function UnauthorizedHeader({ pointed, loggedIn, location }) {
               </li>
             )}
             <li
-              className={`header__menu-item${location.pathname === "/" && !isMenuOpen ? " header__menu-item_place_main" : ""}${
+              className={`header__menu-item${location.pathname === "/movies-explorer-frontend/" && !isMenuOpen ? " header__menu-item_place_main" : ""}${
                 isMenuOpen ? " header__menu-item_opened" : ""
               }`}
             >
               <NavLink
-                to="/movies"
+                to="/movies-explorer-frontend/movies"
                 onClick={closeMenu}
                 className={
                   pointed === "films"
-                    ? `header__menu-link header__menu-link_pointed${location.pathname === "/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
-                    : `header__menu-link${location.pathname === "/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
+                    ? `header__menu-link header__menu-link_pointed${location.pathname === "/movies-explorer-frontend/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
+                    : `header__menu-link${location.pathname === "/movies-explorer-frontend/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
                 }
               >
                 Фильмы
               </NavLink>
             </li>
             <li
-              className={`header__menu-item${location.pathname === "/" && !isMenuOpen ? " header__menu-item_place_main" : ""}${
+              className={`header__menu-item${location.pathname === "/movies-explorer-frontend/" && !isMenuOpen ? " header__menu-item_place_main" : ""}${
                 isMenuOpen ? " header__menu-item_opened" : ""
               }`}
             >
               <NavLink
-                to="/saved-movies"
+                to="/movies-explorer-frontend/saved-movies"
                 onClick={closeMenu}
                 className={
                   pointed === "saved"
-                    ? `header__menu-link header__menu-link_pointed${location.pathname === "/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
-                    : `header__menu-link${location.pathname === "/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
+                    ? `header__menu-link header__menu-link_pointed${location.pathname === "/movies-explorer-frontend/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
+                    : `header__menu-link${location.pathname === "/movies-explorer-frontend/" && !isMenuOpen ? " header__menu-link_place_main" : ""}`
                 }
               >
                 Сохранённые фильмы
@@ -79,9 +79,9 @@ function UnauthorizedHeader({ pointed, loggedIn, location }) {
             </li>
           </ul>
           <NavLink
-            to="/profile"
+            to="/movies-explorer-frontend/profile"
             onClick={closeMenu}
-            className={`header__account${location.pathname === "/" && !isMenuOpen ? " header__accaunt_place_main" : ""}${
+            className={`header__account${location.pathname === "/movies-explorer-frontend/" && !isMenuOpen ? " header__accaunt_place_main" : ""}${
               isMenuOpen ? " header__account_opened" : ""
             }`}
           >
@@ -90,7 +90,7 @@ function UnauthorizedHeader({ pointed, loggedIn, location }) {
           </NavLink>
           {!isMenuOpen && (
             <button
-              className={`header__menu${location.pathname === "/" && !isMenuOpen ? " header__menu_place_main" : ""}${
+              className={`header__menu${location.pathname === "/movies-explorer-frontend/" && !isMenuOpen ? " header__menu_place_main" : ""}${
                 isMenuOpen ? " header__menu_opened" : ""
               }`}
               onClick={openMenu}
@@ -100,13 +100,13 @@ function UnauthorizedHeader({ pointed, loggedIn, location }) {
       ) : (
         <nav className="header__entrence">
           <NavLink
-            to={"/signup"}
+            to={"/movies-explorer-frontend/signup"}
             className="header__button header__button_link_register"
           >
             Регистрация
           </NavLink>
           <NavLink
-            to={"/signin"}
+            to={"/movies-explorer-frontend/signin"}
             className="header__button header__button_link_login"
           >
             Войти

@@ -25,7 +25,7 @@ function Profile({ signOut }) {
         <div className="profile__item profile__item_meaning">{currentUserEmail}</div>
       </div>
       <div className="profile__tools">
-        <NavLink to="/edit-profile" className="profile__button">
+        <NavLink to="/movies-explorer-frontend/edit-profile" className="profile__button">
           Редактировать
         </NavLink>
         <button className="profile__button profile__button_exit" onClick={signOut}>

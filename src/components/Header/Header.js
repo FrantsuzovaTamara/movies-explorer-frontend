@@ -11,7 +11,7 @@ function Header({ children, headerClass }) {
             : "header__content"
         }
       >
-        <NavLink to="/" className="header__logo"></NavLink>
+        <NavLink to="/movies-explorer-frontend/" className="header__logo"></NavLink>
         {children}
       </div>
     </header>

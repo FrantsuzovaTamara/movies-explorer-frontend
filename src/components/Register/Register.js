@@ -14,7 +14,7 @@ function Register({ handleRegister }) {
       buttonText="Зарегистрироваться"
       textUnderButton="Уже зарегистрированы?"
       linkText="Войти"
-      link="/signin"
+      link="/movies-explorer-frontend/signin"
       onSubmit={handleSubmit}
       form="register"
     />

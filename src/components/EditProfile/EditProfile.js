@@ -9,7 +9,7 @@ function EditProfile({ handleUpdateUser }) {
     <Form
       buttonText="Внесите изменения"
       textUnderButton="Хотите вернуться назад к профилю?"
-      link="/profile"
+      link="/movies-explorer-frontend/profile"
       linkText="Профиль"
       onSubmit={handleSubmit}
       form="edit"

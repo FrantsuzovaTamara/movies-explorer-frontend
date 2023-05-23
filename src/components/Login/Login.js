@@ -9,7 +9,7 @@ function Login({ handleLogin }) {
     <Form
       buttonText="Войти"
       textUnderButton="Ещё не зарегистрированы?"
-      link="/signup"
+      link="/movies-explorer-frontend/signup"
       linkText="Регистрация"
       onSubmit={handleSubmit}
       form="login"

@@ -147,7 +147,7 @@ function App() {
           email: email,
           password: password,
         });
-        navigate("/movies");
+        navigate("/movies-explorer-frontend/movies");
       })
       .catch((err) => {
         setIsOpen(true);
@@ -208,7 +208,7 @@ function App() {
     MainApi.editProfileInfo(userData)
       .then((data) => {
         setCurrentUser(data.user);
-        navigate("/profile");
+        navigate("/movies-explorer-frontend/profile");
         setIsOpen(true);
         setError(200);
       })
@@ -234,7 +234,7 @@ function App() {
     setSearchedSavedMovies([]);
     setSavedMovies([]);
     localStorage.clear();
-    navigate("/", { replace: true });
+    navigate("/movies-explorer-frontend/", { replace: true });
   }
 
   // Поиск фильмов
@@ -355,7 +355,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
         <Route
-          path="/"
+          path="/movies-explorer-frontend"
           element={
             <>
               <Header>
@@ -367,7 +367,7 @@ function App() {
           }
         />
         <Route
-          path="/movies"
+          path="/movies-explorer-frontend/movies"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <>
@@ -389,7 +389,7 @@ function App() {
           }
         />
         <Route
-          path="/saved-movies"
+          path="/movies-explorer-frontend/saved-movies"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <>
@@ -409,7 +409,7 @@ function App() {
           }
         />
         <Route
-          path="/profile"
+          path="/movies-explorer-frontend/profile"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <>
@@ -423,7 +423,7 @@ function App() {
           }
         />
         <Route
-          path="/edit-profile"
+          path="/movies-explorer-frontend/edit-profile"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <>
@@ -436,10 +436,10 @@ function App() {
           }
         />
         <Route
-          path="/signin"
+          path="/movies-explorer-frontend/signin"
           element={
             loggedIn ? (
-              <Navigate to="/movies" replace />
+              <Navigate to="/movies-explorer-frontend/movies" replace />
             ) : (
             <>
               <Header headerClass="_form">
@@ -451,10 +451,10 @@ function App() {
           }
         />
         <Route
-          path="/signup"
+          path="/movies-explorer-frontend/signup"
           element={
             loggedIn ? (
-              <Navigate to="/movies" replace />
+              <Navigate to="/movies-explorer-frontend/movies" replace />
             ) : (
             <>
               <Header headerClass="_form">
@@ -466,7 +466,7 @@ function App() {
           }
         />
         <Route
-          path="/404"
+          path="/movies-explorer-frontend/404"
           element={
             <>
               <Error />
@@ -476,7 +476,7 @@ function App() {
         <Route
           path={location.pathname}
           element={
-            <Navigate to="/404" replace />
+            <Navigate to="/movies-explorer-frontend/404" replace />
           }
         />
       </Routes>

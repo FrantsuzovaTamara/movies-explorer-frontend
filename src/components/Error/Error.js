@@ -8,7 +8,7 @@ function Error() {
             <h1 className="error__number">404</h1>
             <p className="error__explanation">Страница не найдена</p>
         </div>
-        <NavLink to="/" className="error__link">Назад</NavLink>
+        <NavLink to="/movies-explorer-frontend/" className="error__link">Назад</NavLink>
     </div>
   );
 }
