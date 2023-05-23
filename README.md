@@ -1,6 +1,6 @@
 ![Шапка сайта](./src/images/readme__header.png)
 
-# Проект: Место
+# Проект: Movies Explorer
 
 ## Обзор
 
